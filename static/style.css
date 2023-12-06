@@ -1,3 +1,30 @@
+/* header*/
+header {
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    z-index: 1000;
+
+
+    -webkit-box-shadow: 0 5px 25 px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    background: #fff
+}
+
+.head_img
+{
+    height: 64px;
+    width: 109px;
+}
+/*
+<style>
+  body {
+    background-image: url('static/img/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
+/*
 html {
   background-image: url(img/background.jpg);
   background-repeat: no-repeat;
@@ -8,3 +35,4 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
