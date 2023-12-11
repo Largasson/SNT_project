@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://snt:qwerty123456@176.113.83.24/exmple'
+app.config['SQLALCHEMY_DATABASE_URI'] = "POSTGRES"
 
 db = SQLAlchemy(app)
 
