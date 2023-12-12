@@ -1,12 +1,17 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
+from wtforms import SubmitField
 import csv
 import io
 
 
-class PhotoForm(FlaskForm):
-    file = FileField()
+class UplaudFileForm(FlaskForm):
+    file = FileField(render_kw={'class': 'form-control', 'label': ''})
+    Загрузить = SubmitField(render_kw={'class': 'btn btn-info'})
+
+
+
 
 
 app = Flask(__name__)
@@ -35,7 +40,8 @@ def registration():
 
 @app.route('/board_office', methods=['GET', 'POST'])
 def board_office():
-    form = PhotoForm()
+    form = UplaudFileForm()
+
     if form.validate_on_submit():
         f = form.file.data
         text_from_csv = f.read().decode('cp1251')

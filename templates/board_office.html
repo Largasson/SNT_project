@@ -36,42 +36,27 @@
            <div class="col">
              <div class="p-3">
                   <div class="d-grid gap-2">
-                      <div class="mb-3">
+
                         <label for="formFile" class="fs-1">Загрузить файл "оборотки"</label>
 
 
 
                           <form method="POST" enctype="multipart/form-data">
-<br>
-<!--                              <input class="form-control" type="file" id="formFile" >-->
+<div class="mb-3">
                                 {{ form.csrf_token }}
-                                {{ form.file.label }} {{ form.file(size=20) }}
-                                <input type="submit" value="Go">
+                                {{ form.file(size=20) }}
 
+</div>
+                                    <div class="d-grid gap-2">
+                                          {{ form.Загрузить() }}
+                                    </div>
                           </form>
 
-<!--                        <input class="form-control" type="file" id="formFile">-->
 
-                      </div>
                   </div>
              </div>
         </div>
-          <div class="col">
-                  <div class="p-3">
-                      <div class="mb-3">
-                        <label for="formFile" class="fs-1">Загрузить файл реестра</label>
-                        <input class="form-control" type="file" id="formFile">
 
-
-
-
-                      </div>
-                      <div class="d-grid gap-2">
-
-                        <a class="btn btn-info" href="#" role="button">Скачать реестр</a>
-                      </div>
-                  </div>
-          </div>
         </div>
     </div>
 
