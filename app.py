@@ -7,12 +7,9 @@ import io
 
 
 class UplaudFileForm(FlaskForm):
-    file = FileField(render_kw={'class': 'form-control', 'label': ''})
+
+    file = FileField(render_kw={'class': 'form-control'})
     Загрузить = SubmitField(render_kw={'class': 'btn btn-info'})
-
-
-
-
 
 app = Flask(__name__)
 
@@ -50,8 +47,8 @@ def board_office():
         for row in our_dict:
             print(row)
 
-        return render_template('board_office.html', form=form)
-    return render_template('board_office.html', form=form)
+        return render_template('board_office.html', a=form)
+    return render_template('board_office.html', a=form)
 
 
 @app.route('/lk_page')

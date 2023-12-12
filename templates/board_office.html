@@ -39,17 +39,14 @@
 
                         <label for="formFile" class="fs-1">Загрузить файл "оборотки"</label>
 
-
-
                           <form method="POST" enctype="multipart/form-data">
-<div class="mb-3">
-                                {{ form.csrf_token }}
-                                {{ form.file(size=20) }}
-
-</div>
-                                    <div class="d-grid gap-2">
-                                          {{ form.Загрузить() }}
-                                    </div>
+                            <div class="mb-3">
+                                {{ a.csrf_token }}
+                                {{ a.file}}
+                            </div>
+                            <div class="d-grid gap-2">
+                                {{ a.Загрузить() }}
+                            </div>
                           </form>
 
 
