@@ -4,6 +4,9 @@ from flask_wtf.file import FileField
 from wtforms import SubmitField
 import csv
 import io
+from flask_sqlalchemy import SQLAlchemy
+
+import settings
 
 
 class UplaudFileForm(FlaskForm):
@@ -12,6 +15,9 @@ class UplaudFileForm(FlaskForm):
     Загрузить = SubmitField(render_kw={'class': 'btn btn-info'})
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.KEY_DB
+db = SQLAlchemy(app)
+
 
 app.config.update(dict(
     SECRET_KEY="powerful secretkey",
