@@ -1,22 +1,49 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
-from wtforms import SubmitField
-import csv
+from wtforms import Form, SubmitField, StringField, PasswordField, validators
+from wtforms.validators import DataRequired
 import io
+from webapp.parsing_csv import parsing_csv
+from webapp.config import SECRET_KEY, WTF_CSRF_SECRET_KEY
+
+
+class User:
+    def __init__(self, area_number, email, phone, password):
+        self.area_number = area_number
+        self.email = email
+        self.phone = phone
+        self.password = password
+
+    def __repr__(self):
+        return f"{self.area_number} - ({self.email}{self.phone}{self.password})"
 
 
 def create_app():
     class UploadFileForm(FlaskForm):
-
         file = FileField(render_kw={'class': 'form-control'})
-        Загрузить = SubmitField(render_kw={'class': 'btn btn-info'})
+        submit = SubmitField(label='Загрузить', render_kw={'class': 'btn btn-info'})
+
+    class RegistrationForm(Form):
+        area = StringField(render_kw={'class': 'form-control', 'type': 'area', 'placeholder': '12'},
+                           validators=[validators.Length(min=1, max=2)])
+        email = StringField(render_kw={'class': 'form-control', 'type': 'text', 'placeholder': 'name@example.com'},
+                            validators=[DataRequired()])
+        phone = StringField(render_kw={'class': 'form-control', 'type': 'text', 'placeholder': '89262521235'},
+                            validators=[validators.Length(min=10, max=10)])
+        password1 = PasswordField(render_kw={'class': 'form-control', 'type': 'password1', 'placeholder': 'Password'},
+                                  validators=[DataRequired(),
+                                              validators.EqualTo('password', message='Passwords must match')])
+
+        password = PasswordField(render_kw={'class': 'form-control', 'type': 'password', 'placeholder': 'Password'})
+
+        submit = SubmitField(label='Зарегистрироваться', render_kw={'class': 'btn btn-primary w-100 py-2'})
 
     app = Flask(__name__)
 
     app.config.update(dict(
-        SECRET_KEY="powerful secretkey",
-        WTF_CSRF_SECRET_KEY="a csrf secret key"
+        SECRET_KEY=SECRET_KEY,
+        WTF_CSRF_SECRET_KEY=WTF_CSRF_SECRET_KEY
     ))
 
     @app.route('/')
@@ -28,22 +55,27 @@ def create_app():
     def log_in():
         return render_template('log_in.html')
 
-    @app.route('/registration')
+    @app.route('/registration', methods=['GET', 'POST'])
     def registration():
-        return render_template('registration.html')
+        form = RegistrationForm(request.form)
+        if request.method == 'POST' and form.validate():
+            user = User(form.area.data, form.email.data, form.phone.data, form.password1.data)
+            print(user)
+            flash('Thanks for registering')
+            return redirect(url_for('log_in'))
+        return render_template('registration.html', form=form)
 
     @app.route('/board_office', methods=['GET', 'POST'])
     def board_office():
         form = UploadFileForm()
-
         if form.validate_on_submit():
             f = form.file.data
             text_from_csv = f.read().decode('cp1251')
             data = io.StringIO(text_from_csv)
-            our_dict = csv.DictReader(data, delimiter=';')  # словарь для БД
-            for row in our_dict:
-                print(row)
-
+            our_dict = parsing_csv(data)
+            key_sort = list(sorted(our_dict))
+            for k in key_sort:
+                print(f'КЛЮЧ {k}: {our_dict[k]}')
             return render_template('board_office.html', a=form)
         return render_template('board_office.html', a=form)
 

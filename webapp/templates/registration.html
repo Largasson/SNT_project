@@ -14,31 +14,38 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
-    <form>
+    <form method="POST" action="/">
         <h1 class="h3 mb-3 fw-normal text-center">Зарегистрируйтесь</h1>
         <div class="form-floating">
-            <input type="area" class="form-control" id="floatingInput" placeholder="12">
-            <label for="floatingInput">Введите номер участка</label>
+                {{ form.csrf_token }}
+                {{ form.area }}
+                <label for="floatingInput">Введите номер участка</label>
         </div>
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Введите e-mail</label>
+                {{ form.csrf_token }}
+                {{ form.email }}
+                <label for="floatingInput">Введите e-mail</label>
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.phone }}
+                <label for="floatingInput">Введите номер телефона</label>
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.password1 }}
+                <label for="floatingPassword">Введите пароль</label>
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.password }}
+                <label for="floatingPassword">Введите пароль еще раз</label>
         </div>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="+79262521235">
-            <label for="floatingInput">Введите номер телефона</label>
+                <input type="submit" value="Go">
+                {{ form.submit() }}
 
-        </div>
-        <div class="form-floating">
-            <input type="password1" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Введите пароль</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Введите пароль еще раз</label>
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Зарегистрироваться</button>
+
         <p class="mt-2 mb-3 text-body-secondary">&copy;2023</p>
     </form>
 </main>
