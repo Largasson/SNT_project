@@ -16,7 +16,7 @@ class User:
         self.password = password
 
     def __repr__(self):
-        return f"{self.area_number} - ({self.email}{self.phone}{self.password})"
+        return f"{self.area_number} - (({self.email})({self.phone})({self.password}))"
 
 
 def create_app():
@@ -25,19 +25,41 @@ def create_app():
         submit = SubmitField(label='Загрузить', render_kw={'class': 'btn btn-info'})
 
     class RegistrationForm(Form):
-        area = StringField(render_kw={'class': 'form-control', 'type': 'area', 'placeholder': '12'},
-                           validators=[validators.Length(min=1, max=2)])
-        email = StringField(render_kw={'class': 'form-control', 'type': 'text', 'placeholder': 'name@example.com'},
-                            validators=[DataRequired()])
-        phone = StringField(render_kw={'class': 'form-control', 'type': 'text', 'placeholder': '89262521235'},
-                            validators=[validators.Length(min=10, max=10)])
-        password1 = PasswordField(render_kw={'class': 'form-control', 'type': 'password1', 'placeholder': 'Password'},
-                                  validators=[DataRequired(),
-                                              validators.EqualTo('password', message='Passwords must match')])
-
-        password = PasswordField(render_kw={'class': 'form-control', 'type': 'password', 'placeholder': 'Password'})
-
+        area = StringField(render_kw={
+                                    'class': 'form-control',
+                                    'type': 'area',
+                                    'placeholder': '12'
+                                    }, validators=[validators.Length(min=1, max=2)])
+        email = StringField(render_kw={
+                                    'class': 'form-control',
+                                    'type': 'text',
+                                    'placeholder': 'name@example.com'
+                                        }, validators=[DataRequired()])
+        phone = StringField(render_kw={
+                                    'class': 'form-control',
+                                    'type': 'text',
+                                    'placeholder': '89262521235'
+                                         }, validators=[validators.Length(min=10, max=10)])
+        password1 = PasswordField(render_kw={
+                                    'class': 'form-control',
+                                    'type': 'password1',
+                                    'placeholder': 'Password'
+                                            }, validators=[
+                                                        DataRequired(),
+                                                        validators.EqualTo('password',
+                                                                           message='Passwords must match')
+                                                         ])
+        password = PasswordField(render_kw={
+                                        'class': 'form-control',
+                                        'type': 'password',
+                                        'placeholder': 'Password'
+                                            })
         submit = SubmitField(label='Зарегистрироваться', render_kw={'class': 'btn btn-primary w-100 py-2'})
+
+    class LoginForm(FlaskForm):
+        area = StringField('area_number')
+        password = PasswordField('Password')
+        submit = SubmitField('Submit')
 
     app = Flask(__name__)
 
@@ -51,17 +73,33 @@ def create_app():
     def index():
         return render_template('index.html')
 
-    @app.route('/log_in')
+    @app.route('/log_in', methods=['GET', 'POST'])
     def log_in():
+        # if current_user.is_authenticated:
+        #     return redirect(url_for('index'))
+        form = LoginForm()
+        # if form.validate_on_submit():
+        #     user = form.area.data
+        #     if user is None or not user.check_password(form.password.data):
+        #         flash('Invalid username or password')
+        #         return redirect(url_for('login'))
+        #     login_user(user, remember=form.remember_me.data)
+        #     return redirect(url_for('index'))
+        # return render_template('login.html', title='Sign In', form=form)
+        #
+
+
         return render_template('log_in.html')
 
     @app.route('/registration', methods=['GET', 'POST'])
     def registration():
         form = RegistrationForm(request.form)
         if request.method == 'POST' and form.validate():
-            user = User(form.area.data, form.email.data, form.phone.data, form.password1.data)
+            user = User(form.area.data,
+                        form.email.data,
+                        form.phone.data,
+                        form.password1.data)
             print(user)
-            flash('Thanks for registering')
             return redirect(url_for('log_in'))
         return render_template('registration.html', form=form)
 

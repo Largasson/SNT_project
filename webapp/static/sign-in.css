@@ -13,7 +13,20 @@ body {
   z-index: -2;
 }
 
+
+.errors {
+margin: +10px;
+
+
+}
+
 .form-signin input[id="area"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="area"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
