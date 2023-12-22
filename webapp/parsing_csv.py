@@ -1,7 +1,5 @@
 import csv
 import io
-from collections import defaultdict
-from functools import partial
 from datetime import date
 from typing import TypedDict
 from webapp.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
@@ -82,8 +80,6 @@ def parsing_csv(file):
 
     res_dict = {}  # итоговый словарь
 
-    # make_default_dict = partial(gen_temp_dict, format_date)
-    # res_dict = defaultdict(make_default_dict)
 
     temp_dict = None
     for row in our_dict:

@@ -14,41 +14,40 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
-    <form method="POST">
-<!--        <form method="POST" action="/">-->
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+     {% endwith %}
+    <form action="{{ url_for('reg_processing') }}" method="POST">
+
         <h1 class="h3 mb-3 fw-normal text-center">Зарегистрируйтесь</h1>
         <div class="form-floating">
                 {{ form.csrf_token }}
-                {{ form.area }}
-                <label for="floatingInput">Введите номер участка</label>
+                {{ form.area_number(type="area_number") }} {{ form.area_number.label }}
         </div>
         <div class="form-floating">
                 {{ form.csrf_token }}
-                {{ form.email }}
-                <label for="floatingInput">Введите e-mail</label>
+                {{ form.email }} {{ form.email.label }}
         </div>
         <div class="form-floating">
                 {{ form.csrf_token }}
-                {{ form.phone }}
-                <label for="floatingInput">Введите номер телефона</label>
+                {{ form.phone }} {{ form.phone.label }}
         </div>
         <div class="form-floating">
                 {{ form.csrf_token }}
-                {{ form.password1 }}
-            {% if form.password1.errors %}
-                <ul class="errors">
-                {% for error in form.password1.errors %}
-                    <li>Пароли должны совпадать</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-                <label for="floatingPassword">Введите пароль</label>
+                {{ form.password }} {{ form.password.label }}
         </div>
         <div class="form-floating">
                 {{ form.csrf_token }}
-                {{ form.password }}
-                <label for="floatingPassword">Введите пароль еще раз</label>
+                {{ form.confirm(mod="password1") }} {{ form.confirm.label }}
+
         </div>
+
                    {{ form.submit() }}
         <p class="mt-2 mb-3 text-body-secondary">&copy;2023</p>
 
