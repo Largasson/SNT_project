@@ -32,3 +32,13 @@ footer {
     /* color: var(--bs-secondary-color)!important; */
     color: white;!important
 }
+
+body {
+      background-image: url('/static/img/background_3.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Arial', sans-serif; /* Установка шрифта */
+    font-size: 18px; /* Размер шрифта */
+    line-height: 1.6; /* Межстрочный интервал */
+    color: white; /* Цвет текста */
+    }

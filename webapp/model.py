@@ -15,8 +15,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100))
     phone = db.Column(db.String(20))
     password = db.Column(db.String(128))
-    role = db.Column(db.String(10), index=True)
-    user_finance = relationship("FinancialData", backref='user_table')
+    role = db.Column(db.String(10), nullable=True)
+    # user_finance = relationship("FinancialData", backref='user_table')
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -36,8 +36,8 @@ class User(db.Model, UserMixin):
 class News(db.Model):
     __tablename__ = 'news_table'
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    published: Mapped[datetime.UTC] = mapped_column(nulalble=False)
-    text: Mapped[str] = mapped_column(nulalble=True)
+    # published: Mapped[datetime.UTC] = mapped_column(nulalble=False)
+    # text: Mapped[str] = mapped_column(nulalble=True)
 
     def __repr__(self):
         return '<News {} {}>'.format(self.id, self.published)
@@ -52,7 +52,7 @@ class FinancialData(db.Model):
     debt_electricity_payment: Mapped[int] = mapped_column(nullable=True)
     overpayment_members_payment: Mapped[int] = mapped_column(nullable=True)
     overpayment_electricity_payment: Mapped[int] = mapped_column(nullable=True)
-    user_data = relationship('financial_data_user', back_populates='financial_data', lazy=True)
+    # user_data = relationship('financial_data_user', back_populates='financial_data', lazy=True)
 
 
 # Таблица для отображения в ЛК у пользователя

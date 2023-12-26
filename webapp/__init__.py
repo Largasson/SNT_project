@@ -94,7 +94,7 @@ def create_app():
             db.session.add(new_user)
             db.session.commit()
             flash('Вы зарегистрированы')
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         else:
             flash('Пароли не совпадают')
             return redirect(url_for('registration'))
@@ -121,9 +121,11 @@ def create_app():
     @app.route('/user/<int:area>')
     def lk_page(area):
         """ Функция генерирующая страницу рядового пользователя"""
+        title = f'Страница пользователя {area}'
+        number_area = area
         if area == 0:
             return redirect(url_for('board_office'))
-        return render_template('lk_page.html')
+        return render_template('lk_page.html', page_title=title, area=number_area)
 
 
     @app.route('/contacts')
