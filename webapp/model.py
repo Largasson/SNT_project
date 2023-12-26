@@ -1,7 +1,7 @@
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Date
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -36,8 +36,8 @@ class User(db.Model, UserMixin):
 class News(db.Model):
     __tablename__ = 'news_table'
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    # published: Mapped[datetime.UTC] = mapped_column(nulalble=False)
-    # text: Mapped[str] = mapped_column(nulalble=True)
+    published: Mapped[datetime.datetime] = mapped_column(nullable=False)
+    text: Mapped[str] = mapped_column(nullable=True)
 
     def __repr__(self):
         return '<News {} {}>'.format(self.id, self.published)
@@ -46,21 +46,11 @@ class News(db.Model):
 # Общая финансовая таблица, загружаемая извне в ЛК у админа
 class FinancialData(db.Model):
     __tablename__ = 'financial_data'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    area_number: Mapped[int] = mapped_column()
-    debt_members_payment: Mapped[int] = mapped_column(nullable=True)
-    debt_electricity_payment: Mapped[int] = mapped_column(nullable=True)
-    overpayment_members_payment: Mapped[int] = mapped_column(nullable=True)
-    overpayment_electricity_payment: Mapped[int] = mapped_column(nullable=True)
+    id: Mapped[int] = mapped_column(autoincrement=True, nullable=False)
+    area_number: Mapped[int] = mapped_column(primary_key=True, nullable=False)
+    member_fee: Mapped[int] = mapped_column(nullable=True)
+    targeted_fee: Mapped[int] = mapped_column(nullable=True)
+    electricity_payments: Mapped[int] = mapped_column(nullable=True)
+    published = db.Column(Date, nullable=False)
     # user_data = relationship('financial_data_user', back_populates='financial_data', lazy=True)
 
-
-# Таблица для отображения в ЛК у пользователя
-class FinancialDataUser(db.Model):
-    __tablename__ = 'financial_data_user'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey(FinancialData.id))
-    debt_members_payment: Mapped[int] = mapped_column(nullable=True)
-    debt_electricity_payment: Mapped[int] = mapped_column(nullable=True)
-    overpayment_members_payment: Mapped[int] = mapped_column(nullable=True)
-    overpayment_electricity_payment: Mapped[int] = mapped_column(nullable=True)

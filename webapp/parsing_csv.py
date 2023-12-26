@@ -7,6 +7,7 @@ from webapp.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
                            CREDIT_FOR, DEBIY_FOR)
 
 
+
 class Error_csv_file(Exception):
     pass
 
@@ -80,7 +81,6 @@ def parsing_csv(file):
 
     res_dict = {}  # итоговый словарь
 
-
     temp_dict = None
     for row in our_dict:
         if row[COUNTERPARTIES].strip() not in list_of_stop:
@@ -100,8 +100,10 @@ def parsing_csv(file):
     return res_dict
 
 
-if __name__ == '__main__':
-    with open('76.csv', 'r', encoding='cp1251') as file:
-        res_dict = parsing_csv(file)
-        for k, v in res_dict.items():
-            print(v)
+
+
+
+
+
+
+

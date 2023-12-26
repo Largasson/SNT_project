@@ -34,7 +34,7 @@ footer {
 }
 
 body {
-      background-image: url('/static/img/background_3.jpg');
+      background-image: url('/static/img/background_2.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       font-family: 'Arial', sans-serif; /* Установка шрифта */
@@ -42,3 +42,26 @@ body {
     line-height: 1.6; /* Межстрочный интервал */
     color: white; /* Цвет текста */
     }
+caption {
+font-size: 22px;
+color: black;!important
+}
+
+.flex-container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.first {
+  background: #98FB98;
+  height: 50px;
+  flex-grow: 4;
+}
+
+.second {
+  background: green;
+  height: 50px;
+  flex-grow: 6;
+}

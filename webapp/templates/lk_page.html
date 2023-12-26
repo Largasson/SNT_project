@@ -3,9 +3,13 @@
 {% block body %}
 
 <div class="container">
-    <div class="bg-success text-wight">
-        <div>
-            <label class="fs-1">Добро пожаловать в "Личный кабинет"</label>
+    <div class="flex-container">
+        <div class="first">
+            <a href="/{{ area }}.xlsx" style="color: black" download>Скачать акт сверки</a>
+
+        </div>
+        <div class="second">
+            <p style="text-align: center">Добро пожаловать в личный кабинет, пользователь {{ area }}!</p>
         </div>
     </div>
     <div class="row">
