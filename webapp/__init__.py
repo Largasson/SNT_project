@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 import io
 from webapp.parsing_csv import parsing_csv
-from webapp.model import db, User
+from webapp.model import db, User, FinancialData
 from webapp.forms import RegistrationForm, UploadFileForm, LoginForm
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
@@ -99,7 +99,6 @@ def create_app():
             flash('Пароли не совпадают')
             return redirect(url_for('registration'))
 
-
     @app.route('/board_office', methods=['GET', 'POST'])
     def board_office():
         """ Функция, отвечающая за страницу Правления(админ-страница). Предает в функцию рендеринга
@@ -117,16 +116,22 @@ def create_app():
             return render_template('board_office.html', a=form, page_title=title)
         return render_template('board_office.html', a=form, page_title=title)
 
-
     @app.route('/user/<int:area>')
     def lk_page(area):
         """ Функция генерирующая страницу рядового пользователя"""
         title = f'Страница пользователя {area}'
         number_area = area
+        # Функция запроса из бд
+        info = FinancialData.query.filter(FinancialData.area_number == area).all()
+        data_list = [
+            {'area_number': entry.area_number, 'member_fee': entry.member_fee, 'targeted_fee': entry.targeted_fee,
+             'electricity_payments': entry.electricity_payments, 'published': entry.published} for entry in info]
         if area == 0:
             return redirect(url_for('board_office'))
-        return render_template('lk_page.html', page_title=title, area=number_area)
-
+        return render_template('lk_page.html', page_title=title, area=number_area,
+                               member_fee=data_list[0]['member_fee'], targeted_fee=data_list[0]['targeted_fee'],
+                               electricity_payments=data_list[0]['electricity_payments'],
+                               published=data_list[0]['published'])
 
     @app.route('/contacts')
     def contacts():

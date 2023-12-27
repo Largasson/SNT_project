@@ -16,21 +16,21 @@
         <div class="col-xs-12 col-md-6">
             <div class="table-responsive">
                 <table class="table table-sm table caption-top table table-bordered">
-                    <caption>Данные по состоянию расчетов на дату</caption>
+                    <caption>Данные по состоянию расчетов на {{ published }}</caption>
                     <thead>
                     <tr>
                         <th scope="col">Участок</th>
                         <th scope="col">Членские взносы</th>
-                        <th scope="col">Целевые взносам</th>
+                        <th scope="col">Целевые взносы</th>
                         <th scope="col">Электричество</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <th scope="row">{{ area }}</th>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{{ member_fee }}</td>
+                        <td>{{ targeted_fee }}</td>
+                        <td>{{ electricity_payments }}</td>
                     </tr>
                     </tbody>
                 </table>

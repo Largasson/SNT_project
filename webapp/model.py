@@ -32,9 +32,10 @@ class User(db.Model, UserMixin):
         return self.role == 'admin'
 
 
-# Таблица с новостями на главной странице
+
 class News(db.Model):
     __tablename__ = 'news_table'
+    __table_args__ = {'comment': 'Таблица с новостями на главной странице'}
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     published: Mapped[datetime.datetime] = mapped_column(nullable=False)
     text: Mapped[str] = mapped_column(nullable=True)
@@ -43,14 +44,14 @@ class News(db.Model):
         return '<News {} {}>'.format(self.id, self.published)
 
 
-# Общая финансовая таблица, загружаемая извне в ЛК у админа
+
 class FinancialData(db.Model):
     __tablename__ = 'financial_data'
+    __table_args__ = {'comment': 'Общая финансовая таблица, загружаемая извне в ЛК у админа'}
     id: Mapped[int] = mapped_column(autoincrement=True, nullable=False)
     area_number: Mapped[int] = mapped_column(primary_key=True, nullable=False)
     member_fee: Mapped[int] = mapped_column(nullable=True)
     targeted_fee: Mapped[int] = mapped_column(nullable=True)
     electricity_payments: Mapped[int] = mapped_column(nullable=True)
-    published = db.Column(Date, nullable=False)
-    # user_data = relationship('financial_data_user', back_populates='financial_data', lazy=True)
+    published: Mapped[datetime.date] = mapped_column(nullable=False)
 
