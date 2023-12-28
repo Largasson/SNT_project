@@ -7,8 +7,7 @@ from webapp.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
                            CREDIT_FOR, DEBIY_FOR)
 
 
-
-class Error_csv_file(Exception):
+class CsvFileError(Exception):
     pass
 
 
@@ -58,7 +57,7 @@ def parsing_csv(file):
         if row.startswith(COUNTERPARTIES):
             break
     else:
-        raise Error_csv_file('Неправильный csv-файл. Нет поля "Контрагенты"')
+        raise CsvFileError('Неправильный csv-файл. Нет поля "Контрагенты"')
 
     try:
         tuple_date = extract_date(text[1])
@@ -66,7 +65,7 @@ def parsing_csv(file):
         format_date = tuple_date[1]  # дада в формате datetime
     except ValueError as err:
         print(f'Некорректные данные строки с датой - {err}')
-        raise Error_csv_file('Проверь csv-файл')
+        raise CsvFileError('Проверь csv-файл')
 
     list_of_stop = [TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS, TOTAL, TOTAL_EXPANDED]
     list_of_keys = [CREDIT_FOR + current_date, DEBIY_FOR + current_date]
@@ -98,12 +97,3 @@ def parsing_csv(file):
             for key in list_of_keys:
                 temp_dict['electricity_payments'] += string_to_float(row, key)
     return res_dict
-
-
-
-
-
-
-
-
-

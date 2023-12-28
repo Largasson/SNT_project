@@ -118,20 +118,15 @@ def create_app():
 
     @app.route('/user/<int:area>')
     def lk_page(area):
+        info = FinancialData.query.filter(FinancialData.area_number == area).first()
         """ Функция генерирующая страницу рядового пользователя"""
         title = f'Страница пользователя {area}'
-        number_area = area
-        # Функция запроса из бд
-        info = FinancialData.query.filter(FinancialData.area_number == area).all()
-        data_list = [
-            {'area_number': entry.area_number, 'member_fee': entry.member_fee, 'targeted_fee': entry.targeted_fee,
-             'electricity_payments': entry.electricity_payments, 'published': entry.published} for entry in info]
-        if area == 0:
-            return redirect(url_for('board_office'))
-        return render_template('lk_page.html', page_title=title, area=number_area,
-                               member_fee=data_list[0]['member_fee'], targeted_fee=data_list[0]['targeted_fee'],
-                               electricity_payments=data_list[0]['electricity_payments'],
-                               published=data_list[0]['published'])
+        # if area == 0:
+        # #     return redirect(url_for('board_office'))
+        return render_template('lk_page.html', page_title=title, area=area,
+                               member_fee=info.member_fee, targeted_fee=info.targeted_fee,
+                               electricity_payments=info.electricity_payments,
+                               published=info.published)
 
     @app.route('/contacts')
     def contacts():
