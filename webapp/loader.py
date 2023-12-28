@@ -1,6 +1,6 @@
 from webapp import create_app, db
 from model import FinancialData
-from deleted import deleted_finance_data_db
+# from webapp.deleted import deleted_finance_data_db
 from parsing_csv import parsing_csv
 
 
@@ -12,6 +12,13 @@ def insert_finance_data_db(res_dict):
                                        electricity_payments=item['electricity_payments'],
                                        published=item['date'])
         db.session.add(financial_data)
+    db.session.commit()
+
+
+def deleted_finance_data_db():
+    info_delete = FinancialData.query.all()
+    for item in info_delete:
+        db.session.delete(item)
     db.session.commit()
 
 
