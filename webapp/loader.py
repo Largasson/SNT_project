@@ -1,7 +1,6 @@
 from webapp import create_app, db
-from model import FinancialData
-# from webapp.deleted import deleted_finance_data_db
-from parsing_csv import parsing_csv
+from webapp.model import FinancialData
+from webapp.parsing_csv import parsing_csv
 
 
 def insert_finance_data_db(res_dict):
