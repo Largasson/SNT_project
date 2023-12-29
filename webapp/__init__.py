@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 import io
 from webapp.parsing_csv import parsing_csv
-from webapp.model import db, User
+from webapp.model import db, User, FinancialData
 from webapp.forms import RegistrationForm, UploadFileForm, LoginForm
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
@@ -94,11 +94,10 @@ def create_app():
             db.session.add(new_user)
             db.session.commit()
             flash('Вы зарегистрированы')
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         else:
             flash('Пароли не совпадают')
             return redirect(url_for('registration'))
-
 
     @app.route('/board_office', methods=['GET', 'POST'])
     def board_office():
@@ -117,14 +116,17 @@ def create_app():
             return render_template('board_office.html', a=form, page_title=title)
         return render_template('board_office.html', a=form, page_title=title)
 
-
     @app.route('/user/<int:area>')
     def lk_page(area):
+        info = FinancialData.query.filter(FinancialData.area_number == area).first()
         """ Функция генерирующая страницу рядового пользователя"""
-        if area == 0:
-            return redirect(url_for('board_office'))
-        return render_template('lk_page.html')
-
+        title = f'Страница пользователя {area}'
+        # if area == 0:
+        # #     return redirect(url_for('board_office'))
+        return render_template('lk_page.html', page_title=title, area=area,
+                               member_fee=info.member_fee, targeted_fee=info.targeted_fee,
+                               electricity_payments=info.electricity_payments,
+                               published=info.published)
 
     @app.route('/contacts')
     def contacts():

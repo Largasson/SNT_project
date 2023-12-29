@@ -1,19 +1,67 @@
 {% extends "base.html" %}
-{% block title %}{{ page_title }}{% endblock %}
-   {% block header1 %}
-    <div class="container-xxl">
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <img class="head_img" src="{{ url_for('static', filename='img/icon.png') }}" alt='pic'>
-          </a>
+
+{% block body %}
+
+<div class="container">
+    <div class="flex-container">
+        <div class="first">
+            <a href="/{{ area }}.xlsx" style="color: black" download>Скачать акт сверки</a>
+
         </div>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary text-start ">Главная страница</a></li>
-            </ul>
-        <div class="col-md-3 text-end">
-          <a class="btn btn-primary" href="{{ url_for('logout') }}" role="button">Выйти</a>
+        <div class="second">
+            <p style="text-align: center">Добро пожаловать в личный кабинет, пользователь {{ area }}!</p>
         </div>
-      </header>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="table-responsive">
+                <table class="table table-sm table caption-top table table-bordered">
+                    <caption>Данные по состоянию расчетов на {{ published }}</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Участок</th>
+                        <th scope="col">Членские взносы</th>
+                        <th scope="col">Целевые взносы</th>
+                        <th scope="col">Электричество</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ area }}</th>
+                        <td>{{ member_fee }}</td>
+                        <td>{{ targeted_fee }}</td>
+                        <td>{{ electricity_payments }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-md-pull-4">
+            <div class="table-responsive">
+                <table class="table table-sm table caption-top table table-bordered">
+                    <caption>Таблица 2</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Другая инфа</th>
+                        <th scope="col">Другая инфа</th>
+                        <th scope="col">Другая инфа</th>
+                        <th scope="col">Другая инфа</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ area }}</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>>
+
 {% endblock %}
