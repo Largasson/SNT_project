@@ -1,8 +1,7 @@
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from sqlalchemy import ForeignKey, Date
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
@@ -16,7 +15,13 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(20))
     password = db.Column(db.String(128))
     role = db.Column(db.String(10), nullable=True)
-    # user_finance = relationship("FinancialData", backref='user_table')
+
+    # id: Mapped[int] = mapped_column(autoincrement=True, primary_key=True, nullable=False)
+    # area_number: Mapped[int] = mapped_column(index=True, unique=True, nullable=False)
+    # email: Mapped[str] = mapped_column()
+    # phone: Mapped[str] = mapped_column()
+    # password: Mapped[str] = mapped_column()
+    # role: Mapped[str] = mapped_column(nullable=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -24,13 +29,13 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+
     def __repr__(self):
         return f'Пользователь с участка {self.area_number} с id={self.id}'
 
     @property
     def is_admin(self):
         return self.role == 'admin'
-
 
 
 class News(db.Model):
@@ -44,7 +49,6 @@ class News(db.Model):
         return '<News {} {}>'.format(self.id, self.published)
 
 
-
 class FinancialData(db.Model):
     __tablename__ = 'financial_data'
     __table_args__ = {'comment': 'Общая финансовая таблица, загружаемая извне в ЛК у админа'}
@@ -54,4 +58,3 @@ class FinancialData(db.Model):
     targeted_fee: Mapped[int] = mapped_column(nullable=True)
     electricity_payments: Mapped[int] = mapped_column(nullable=True)
     published: Mapped[datetime.date] = mapped_column(nullable=False)
-

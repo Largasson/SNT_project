@@ -34,15 +34,15 @@ def gen_temp_dict(format_date):
 def string_to_float(row: dict, key: str):
     """Функция проверяет есть ли в поле по ключу какие-то значение.
     Если есть, то обрабатывает строку и приводит ее значение к float."""
-    if 'кредит' in key and row[key]:
+    if 'дебет' in key and row[key]:
         return -float(row[key].replace(',', '.').replace(' ', ''))
-    elif 'дебет' in key and row[key]:
+    elif 'кредит' in key and row[key]:
         return float(row[key].replace(',', '.').replace(' ', ''))
     return 0
 
 
 def extract_date(header: str):
-    """Получение даты формирования "оборотки" из шапки csv-файла"""
+    """Получение даты формирования оборотно-сальдовой ведомости из шапки csv-файла"""
     current_date = header.split(';')
     current_date = current_date[0].split('-')[-1].strip()
     day, month, year = map(int, current_date.split('.'))
@@ -62,7 +62,7 @@ def parsing_csv(file):
     try:
         tuple_date = extract_date(text[1])
         current_date = tuple_date[0]  # строка используемая при подстановке
-        format_date = tuple_date[1]  # дада в формате datetime
+        format_date = tuple_date[1]  # дана в формате datetime
     except ValueError as err:
         print(f'Некорректные данные строки с датой - {err}')
         raise CsvFileError('Проверь csv-файл')
@@ -83,7 +83,7 @@ def parsing_csv(file):
     temp_dict = None
     for row in our_dict:
         if row[COUNTERPARTIES].strip() not in list_of_stop:
-            area_number = int(row[COUNTERPARTIES].split()[-1])
+            area_number = int(row[COUNTERPARTIES].split('уч.')[-1])
             temp_dict = gen_temp_dict(format_date)
             temp_dict['area_number'] = int(area_number)
             res_dict[area_number] = temp_dict

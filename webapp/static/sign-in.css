@@ -3,6 +3,14 @@ body {
   height: 100%;
 }
 
+.head_img
+{
+    height: 32px;
+    width: 55px;
+}
+
+
+
 .form-signin {
   max-width: 330px;
   /*max-width: 330px;*/
