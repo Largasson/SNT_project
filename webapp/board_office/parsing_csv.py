@@ -1,5 +1,5 @@
 import csv
-import io
+from io import StringIO
 from datetime import date
 from typing import TypedDict
 from webapp.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
@@ -72,8 +72,8 @@ def parsing_csv(file):
 
     text.pop(index + 1)  # удаление строки со словом Договоры
     text.pop(index + 1)  # удаление строки с общими цифрами
-    l = ''.join(text[index:])
-    data = io.StringIO(l)
+    fin_text = ''.join(text[index:])
+    data = StringIO(fin_text)
     our_dict = csv.DictReader(data, delimiter=';')  # исходный csv.DictReader список словарей
     # for row in our_dict:
     #     print(row)

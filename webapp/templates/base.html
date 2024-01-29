@@ -16,10 +16,10 @@
           </a>
         </div>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary text-start ">Главная страница</a></li>
+              <li><a href="{{ url_for('news.index') }}" class="nav-link px-2 link-secondary text-start ">Главная страница</a></li>
             </ul>
         <div class="col-md-3 text-end">
-          <a class="btn btn-primary" href="{{ url_for('logout') }}" role="button">Выйти</a>
+          <a class="btn btn-primary" href="{{ url_for('user.logout') }}" role="button">Выйти</a>
         </div>
       </header>
     </div>
@@ -30,7 +30,7 @@
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-4">
           <p class="col-md-4 mb-0 text-black">© 2024 ТСН Восток</p>
           <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a href="{{ url_for('contacts') }}" class="nav-link px-2 text-black">Контакты</a></li>
+            <li class="nav-item"><a href="{{ url_for('contacts.contacts') }}" class="nav-link px-2 text-black">Контакты</a></li>
           </ul>
         </footer>
     </div>
