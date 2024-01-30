@@ -1,6 +1,6 @@
 from webapp import create_app, db
-from webapp.board_office.models import FinancialData
-from webapp.board_office.parsing_csv import parsing_csv
+from webapp.lk.models import FinancialData
+from webapp.lk.parsing_csv import parsing_csv
 
 
 def insert_finance_data_db(res_dict):

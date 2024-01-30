@@ -3,27 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>  {% block title %}{{ page_title }}{% endblock %}</title>
+    <title>{% block title %}{{ page_title }}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
-   {% block head %}
-    <div class="container-xxl">
-      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <img class="head_img" src="{{ url_for('static', filename='img/icon.png') }}" alt='pic'>
-          </a>
-        </div>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{{ url_for('news.index') }}" class="nav-link px-2 link-secondary text-start ">Главная страница</a></li>
-            </ul>
-        <div class="col-md-3 text-end">
-          <a class="btn btn-primary" href="{{ url_for('user.logout') }}" role="button">Выйти</a>
-        </div>
-      </header>
-    </div>
-{% endblock %}
+  <div class="container-xxl">
+    {% include 'menu.html' %}
+  </div>
   <body>{% block body %}{% endblock %}</body>
   <div class="fixed-bottom">
       <div class="container">

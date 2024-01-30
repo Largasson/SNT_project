@@ -134,3 +134,11 @@ margin: +10px;
   border-bottom-left-radius: 7px 7px;
 }
 
+
+/* Добавление стилей для задания высоты и прокрутки выпадающего меню */
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+
+}

@@ -15,11 +15,11 @@ def login():
     получении данных из формы они перенаправляются функции process_login """
     if current_user.is_authenticated:
         if current_user.area_number == 0:
-            return redirect(url_for('board_office.board_office'))
+            return redirect(url_for('lk.board_office'))
         return redirect(url_for('lk.lk_page', area=current_user.area_number))
     title = 'Авторизация'
     login_form = LoginForm()
-    return render_template('login.html', page_title=title, form=login_form)
+    return render_template('login/login.html', page_title=title, form=login_form)
 
 
 @blueprint.route('/process_login', methods=['POST'])
@@ -39,6 +39,8 @@ def process_login():
             print(user)
             print(user.check_password(form.password.data))
             login_user(user, remember=form.remember_me.data)
+            if current_user.is_admin:
+                return redirect(url_for('lk.board_office'))
             return redirect(url_for('lk.lk_page', area=form.area_number.data))
     flash('Неверный номер участка или пароль')
     return redirect(url_for('user.login'))
@@ -57,7 +59,7 @@ def registration():
     """ Функция, отвечающая за страницу регистрации"""
     title = 'Регистрация'
     registration_form = RegistrationForm()
-    return render_template('registration.html', page_title=title, form=registration_form)
+    return render_template('login/registration.html', page_title=title, form=registration_form)
 
 
 @blueprint.route('/reg_processing', methods=['POST'])
@@ -70,7 +72,7 @@ def reg_processing():
     print(users)
     if form.validate_on_submit():
         if int(form.area_number.data) in users:
-            flash('Пользователь с таким номером номером участка уже зарегистрирован')
+            flash('Пользователь с таким номером участка уже зарегистрирован')
             return redirect(url_for('user.registration'))
         new_user = User(area_number=form.area_number.data,
                         email=form.email.data,

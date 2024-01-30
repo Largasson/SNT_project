@@ -3,13 +3,11 @@ from flask_login import LoginManager
 
 from webapp.db import db
 
-from webapp.board_office.models import FinancialData
-from webapp.board_office.views import blueprint as board_office_blueprint
-
 from webapp.user.models import User
 from webapp.user.forms import LoginForm
 from webapp.user.views import blueprint as user_blueprint
 
+from webapp.lk.models import FinancialData
 from webapp.lk.views import blueprint as lk_blueprint
 
 from webapp.contact.views import blueprint as contacts_blueprint
@@ -28,7 +26,6 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'user.login'
 
-    app.register_blueprint(board_office_blueprint)
     app.register_blueprint(contacts_blueprint)
     app.register_blueprint(lk_blueprint)
     app.register_blueprint(news_blueprint)

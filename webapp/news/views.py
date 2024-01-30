@@ -9,4 +9,4 @@ def index():
     """ Функция, отвечающая за главную страницу. Передает в функцию
             рендеринга макет главной страницы """
     title = 'Главная страница'
-    return render_template('index.html', page_title=title)
+    return render_template('news/index.html', page_title=title)

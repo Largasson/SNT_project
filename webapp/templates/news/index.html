@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+        {{ message }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col">-->
+<!--            <h1>Колонка 1</h1>-->
+<!--            Чем-то наполним-->
+<!--          </div>-->
+<!--          <div class="col">-->
+<!--            <h1>Колонка 2</h1>-->
+<!--              Новости?-->
+<!--          </div>-->
+<!--          <div class="col">-->
+<!--            <h1>Колонка 2</h1>-->
+<!--              Погода?-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+{% endblock%}
+
+
+
+
+

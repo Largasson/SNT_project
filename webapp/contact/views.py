@@ -7,4 +7,4 @@ blueprint = Blueprint('contacts', __name__)
 def contacts():
     """ Функция перенаправляющая на страницу контактов"""
     title = 'Контакты'
-    return render_template('contacts.html', page_title=title)
+    return render_template('contact/contacts.html', page_title=title)
