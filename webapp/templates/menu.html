@@ -14,49 +14,9 @@
              <div class="btn-group" >
                   <button type="button" class="btn btn-primary dropdown-toggle me-2" data-bs-toggle="dropdown" aria-expanded="false">ЛК участков</button>
                   <ul class="dropdown-menu scrollable-menu">
-                        <li><a class="dropdown-item" href="/user/1">Участок 1</a></li>
-                        <li><a class="dropdown-item" href="/user/2">Участок 2</a></li>
-                        <li><a class="dropdown-item" href="/user/3">Участок 3</a></li>
-                        <li><a class="dropdown-item" href="/user/4">Участок 4</a></li>
-                        <li><a class="dropdown-item" href="/user/5">Участок 5</a></li>
-                        <li><a class="dropdown-item" href="/user/6">Участок 6</a></li>
-                        <li><a class="dropdown-item" href="/user/7">Участок 7</a></li>
-                        <li><a class="dropdown-item" href="/user/8">Участок 8</a></li>
-                        <li><a class="dropdown-item" href="/user/9">Участок 9</a></li>
-                        <li><a class="dropdown-item" href="/user/10">Участок 10</a></li>
-                        <li><a class="dropdown-item" href="/user/11">Участок 11</a></li>
-                        <li><a class="dropdown-item" href="/user/12">Участок 12</a></li>
-                        <li><a class="dropdown-item" href="/user/13">Участок 13</a></li>
-                        <li><a class="dropdown-item" href="/user/14">Участок 14</a></li>
-                        <li><a class="dropdown-item" href="/user/15">Участок 15</a></li>
-                        <li><a class="dropdown-item" href="/user/16">Участок 16</a></li>
-                        <li><a class="dropdown-item" href="/user/17">Участок 17</a></li>
-                        <li><a class="dropdown-item" href="/user/18">Участок 18</a></li>
-                        <li><a class="dropdown-item" href="/user/19">Участок 19</a></li>
-                        <li><a class="dropdown-item" href="/user/20">Участок 20</a></li>
-                        <li><a class="dropdown-item" href="/user/21">Участок 21</a></li>
-                        <li><a class="dropdown-item" href="/user/22">Участок 22</a></li>
-                        <li><a class="dropdown-item" href="/user/23">Участок 23</a></li>
-                        <li><a class="dropdown-item" href="/user/24">Участок 24</a></li>
-                        <li><a class="dropdown-item" href="/user/25">Участок 25</a></li>
-                        <li><a class="dropdown-item" href="/user/26">Участок 26</a></li>
-                        <li><a class="dropdown-item" href="/user/27">Участок 27</a></li>
-                        <li><a class="dropdown-item" href="/user/28">Участок 28</a></li>
-                        <li><a class="dropdown-item" href="/user/29">Участок 29</a></li>
-                        <li><a class="dropdown-item" href="/user/30">Участок 30</a></li>
-                        <li><a class="dropdown-item" href="/user/31">Участок 31</a></li>
-                        <li><a class="dropdown-item" href="/user/32">Участок 32</a></li>
-                        <li><a class="dropdown-item" href="/user/33">Участок 33</a></li>
-                        <li><a class="dropdown-item" href="/user/34">Участок 34</a></li>
-                        <li><a class="dropdown-item" href="/user/35">Участок 35</a></li>
-                        <li><a class="dropdown-item" href="/user/36">Участок 36</a></li>
-                        <li><a class="dropdown-item" href="/user/37">Участок 37</a></li>
-                        <li><a class="dropdown-item" href="/user/38">Участок 38</a></li>
-                        <li><a class="dropdown-item" href="/user/39">Участок 39</a></li>
-                        <li><a class="dropdown-item" href="/user/40">Участок 40</a></li>
-                        <li><a class="dropdown-item" href="/user/41">Участок 41</a></li>
-                        <li><a class="dropdown-item" href="/user/42">Участок 42</a></li>
-                        <li><a class="dropdown-item" href="/user/43">Участок 43</a></li>
+                         {% for i in range(1, 44) %}
+                              <li><a class="dropdown-item" href="/user/{{ i }} ">Участок {{ i }}</a></li>
+                         {% endfor %}
                       </ul>
                     </div>
             <a class="btn btn-primary" href="{{ url_for('user.logout') }}" role="button">Выйти</a>

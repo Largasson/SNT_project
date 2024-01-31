@@ -1,10 +1,13 @@
-from io import StringIO
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 from webapp.user.forms import LoginForm
 from webapp.lk.models import FinancialData
 from webapp.lk.forms import UploadFileForm
-from webapp.lk.parsing_csv import parsing_csv
+from webapp.parsing_csv import parsing_csv
+from webapp.loader import insert_finance_data_db
+from logging import basicConfig, info, INFO
+
+basicConfig(filename='pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('lk', __name__)
 
@@ -35,13 +38,13 @@ def board_office():
         form = UploadFileForm()
         title = 'Страница Правления'
         if form.validate_on_submit():
-            f = form.file.data
-            text_from_csv = f.read().decode('cp1251')
-            data = StringIO(text_from_csv)
-            our_dict = parsing_csv(data)
-            key_sort = list(sorted(our_dict))
+            csv_file = form.convert_file_field_data_to_csv_file()
+            values_to_db = parsing_csv(csv_file)
+            insert_finance_data_db(values_to_db)
+            ''' Логирование распарсеных данных. Нужно для контроля входящего файла '''
+            key_sort = list(sorted(values_to_db))
             for k in key_sort:
-                print(f'КЛЮЧ {k}: {our_dict[k]}')
+                info(f'КЛЮЧ {k}: {values_to_db[k]}')
             return render_template('lk/board_office.html', a=form, page_title=title)
         return render_template('lk/board_office.html', a=form, page_title=title)
     return redirect(url_for('lk.lk_page', area=current_user.area_number))

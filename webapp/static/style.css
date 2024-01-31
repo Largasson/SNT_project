@@ -14,6 +14,28 @@ header {
     height: 64px;
     width: 109px;
 }
+
+.weather_img
+{
+    height: 60px;
+    width: 300px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+
+.news-container {
+    max-height: 500px; /* максимальная высоту для контейнера новостей */
+    overflow-y: auto; /* вертикальная прокрутку, если контейнер превышает максимальную высоту */
+    border: 0px solid #ccc; /* границу для стиля */
+    padding: 10px; /* отступы */
+    direction: rtl; /* Добавим свойство для изменения направления прокрутки */
+    color: #333; /* Цвет текста */
+    width: 100%;
+
+    }
+
+
 footer {
     position: sticky;
     top: 0;
@@ -141,4 +163,36 @@ margin: +10px;
   max-height: 200px;
   overflow-x: hidden;
 
+}
+
+
+/* Стили для изменения цвета стрелок карусели
+.carousel-control-prev-icon {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(305deg) brightness(100%) contrast(100%);
+}
+
+.carousel-control-next-icon {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(305deg) brightness(100%) contrast(100%);
+}
+
+
+
+/* Изменение положения стрелок карусели */
+.carousel-control-prev {
+    top: 50%;
+    transform: translateY(-50%);
+    left: -5px;
+  /*  border: 5px solid #000;*/
+}
+
+.carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 230px;
+
+}
+
+/* Стили для изменения границ и радиуса углов карточек в карусели */
+.carousel-item .card {
+    border-radius: 15px;
 }
