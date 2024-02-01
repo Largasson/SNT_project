@@ -13,23 +13,33 @@
     {% endif %}
     {% endwith %}
 </div>
+
 <br>
+<!-- ОСНОВНОЙ КОНТЕЙНЕР СТРАНИЦЫ -->
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-8">         <!-- ЛЕВАЯ КОЛОНКА -->
             <br>
             <!-- ТУТ БУДУТ НОВОСТИ -->
             <div class="container">
                 <div class="news-container">
-                    {% for news_item in news_items %}
-                        <h1>{{ news_item.title }}</h1>
-                        <p>{{ news_item.text }}</p>
-                    {% endfor %}
+
+
+                             {% for current_news  in news %}
+
+                                  <h1 class="text-center text-xl-left bg-light bg-light bg-opacity-75 p-2">{{ current_news.title }}</h1>
+                                  <p class="text-start fs-3 lh-base text-xl-left bg-light bg-light bg-opacity-75 p-2"> {{ current_news.text }}</p>
+
+                             {% endfor %}
+
+
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
+
+
+        </div>
+        <div class="col-md-4">       <!-- ПРАВАЯ КОЛОНКА -->
             <!-- ТУТ БУДЕТ КАРУСЕЛЬ ПОГОДЫ -->
             <br>
             <br>
