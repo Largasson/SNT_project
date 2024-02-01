@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -7,6 +8,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 WTF_CSRF_SECRET_KEY = os.getenv('WTF_CSRF_SECRET_KEY')
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'webapp.db')
+REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
 # Константы для функции парсинга
@@ -20,4 +22,8 @@ CREDIT_FOR = 'кредит на '
 DEBIY_FOR = 'дебет на '
 
 
-
+# Константы для сервиса погоды
+WEATHER_URL = "https://api.weather.yandex.ru/v2/forecast"
+WEATHER_API_KEY = "757ae7c1-b313-4dc6-92ec-5645b11bbe53"
+LATITUDE = "55.066318"
+LONGITUDE = "37.995591"

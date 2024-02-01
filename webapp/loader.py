@@ -1,6 +1,5 @@
-from webapp import create_app, db
-from webapp.model import FinancialData
-from webapp.parsing_csv import parsing_csv
+from webapp import db
+from webapp.lk.models import FinancialData
 
 
 def insert_finance_data_db(res_dict):
@@ -19,14 +18,3 @@ def deleted_finance_data_db():
     for item in info_delete:
         db.session.delete(item)
     db.session.commit()
-
-
-if __name__ == '__main__':
-    app = create_app()
-    try:
-        with open('test-1.csv', 'r', encoding='cp1251') as file:
-            res_dict = parsing_csv(file)
-    except FileNotFoundError:
-        print('Файл не найден')
-    with app.app_context():
-        insert_finance_data_db(res_dict)
