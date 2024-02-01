@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 
 
 class UploadFileForm(FlaskForm):
-    file = FileField(render_kw={'class': 'form-control'})
+    file = FileField(validators=[DataRequired()], render_kw={'class': 'form-control'})
     submit1 = SubmitField(label='Загрузить', render_kw={'class': 'btn btn-info'})
 
     def convert_file_field_data_to_csv_file(self):

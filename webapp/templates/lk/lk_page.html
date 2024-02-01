@@ -15,7 +15,7 @@
         <div class="col-xs-12 col-md-6">
             <div class="table-responsive">
                 <table class="table table-sm table caption-top table table-bordered">
-                    <caption>Данные по состоянию расчетов на {{ published }}</caption>
+                    <caption>Данные по состоянию лицевого счета на {{ info.published }}</caption>
                     <thead>
                     <tr>
                         <th scope="col">Участок</th>
@@ -27,9 +27,15 @@
                     <tbody>
                     <tr>
                         <th scope="row">{{ area }}</th>
-                        <td>{{ member_fee }}</td>
-                        <td>{{ targeted_fee }}</td>
-                        <td>{{ electricity_payments }}</td>
+                        {% if info %}
+                            <td>{{ info.member_fee }}</td>
+                            <td>{{ info.targeted_fee }}</td>
+                            <td>{{ info.electricity_payments }}</td>
+                        {% else %}
+                            <td>Нет данных</td>
+                            <td>Нет данных</td>
+                            <td>Нет данных</td>
+                        {% endif %}
                     </tr>
                     </tbody>
                 </table>

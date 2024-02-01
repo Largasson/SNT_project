@@ -25,5 +25,6 @@ DEBIY_FOR = 'дебет на '
 # Константы для сервиса погоды
 WEATHER_URL = "https://api.weather.yandex.ru/v2/forecast"
 WEATHER_API_KEY = "757ae7c1-b313-4dc6-92ec-5645b11bbe53"
+
 LATITUDE = "55.066318"
 LONGITUDE = "37.995591"
