@@ -27,16 +27,24 @@
            </div>
         </div>
     </div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Последнее сообщение
-            </div>
-            <div class="card-body">
-                    <h5 class="card-title">Особое обращение с заголовком</h5>
-                       <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
-                        <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-            </div>
+    <!-- блок с новостями-->
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Написать новость
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="news_title1" class="form-label">Заголовок новости</label>
+                    <input type="text" class="form-control" id="news_title1" name="news_title">
+                </div>
+                <div class="mb-3">
+                    <label for="news_content1" class="form-label">Содержание новости</label>
+                    <textarea class="form-control" id="news_content1" name="news_content" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Опубликовать</button>
+            </form>
         </div>
     </div>
 
