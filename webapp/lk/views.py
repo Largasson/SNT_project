@@ -42,7 +42,7 @@ def board_office():
         form = UploadFileForm()
         news_form = NewsForm()
         title = 'Страница Правления'
-        if form.validate_on_submit():
+        if form.submit1.data and form.validate_on_submit():
             csv_file = form.convert_file_field_data_to_csv_file()
             values_to_db = parsing_csv(csv_file)
             insert_finance_data_db(values_to_db)
@@ -50,15 +50,13 @@ def board_office():
             key_sort = list(sorted(values_to_db))
             for k in key_sort:
                 info(f'КЛЮЧ {k}: {values_to_db[k]}')
-            return render_template('lk/board_office.html', a=form, page_title=title)
-        elif request.method == 'POST':
+            return render_template('lk/board_office.html', a=form, b=news_form, page_title=title)
+        if news_form.submit2.data and news_form.validate_on_submit():
             news_title = news_form.news_title.data
             news_content = news_form.news_content.data
             new_news = News(published=datetime.utcnow(), text=news_content, title=news_title)
             db.session.add(new_news)
             db.session.commit()
-            return redirect(url_for('lk.board_office'))
-        news_items = News.query.all()
-        return render_template('index.html', news_items=news_items)
-        return render_template('lk/board_office.html', a=form, page_title=title)
+            return render_template('lk/board_office.html', a=form, b=news_form, page_title=title)
+        return render_template('lk/board_office.html', a=form, b=news_form, page_title=title)
     return redirect(url_for('lk.lk_page', area=current_user.area_number))

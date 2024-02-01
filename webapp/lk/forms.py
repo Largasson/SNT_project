@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 
 class UploadFileForm(FlaskForm):
     file = FileField(render_kw={'class': 'form-control'})
-    submit = SubmitField(label='Загрузить', render_kw={'class': 'btn btn-info'})
+    submit1 = SubmitField(label='Загрузить', render_kw={'class': 'btn btn-info'})
 
     def convert_file_field_data_to_csv_file(self):
         f = self.file.data
@@ -14,8 +14,14 @@ class UploadFileForm(FlaskForm):
         return StringIO(text_from_csv)
 
 
-
 class NewsForm(FlaskForm):
-    news_title = StringField('Заголовок новости', validators=[DataRequired()])
-    news_content = TextAreaField('Содержание новости', render_kw={'class': 'btn btn-primary'})
-    submit = SubmitField('Опубликовать')
+    news_title = StringField(label='Заголовок новости', validators=[DataRequired()], render_kw={'class': 'form-control'})
+    news_content = TextAreaField(label='Содержание новости', validators=[DataRequired()], render_kw={'class': 'form-control'})
+    submit2 = SubmitField(label='Опубликовать', render_kw={'class': 'btn btn-info'})
+
+
+
+
+
+
+
