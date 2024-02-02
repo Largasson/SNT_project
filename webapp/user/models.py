@@ -12,13 +12,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128))
     role = db.Column(db.String(10), nullable=True)
 
-    # id: Mapped[int] = mapped_column(autoincrement=True, primary_key=True, nullable=False)
-    # area_number: Mapped[int] = mapped_column(index=True, unique=True, nullable=False)
-    # email: Mapped[str] = mapped_column()
-    # phone: Mapped[str] = mapped_column()
-    # password: Mapped[str] = mapped_column()
-    # role: Mapped[str] = mapped_column(nullable=True)
-
     def set_password(self, password):
         self.password = generate_password_hash(password)
 

@@ -7,7 +7,7 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{ url_for('news.index') }}" class="nav-link px-2 link-secondary text-start ">Сайт ТСН "Восток"</a></li>
         </ul>
-    <div class="col-md-4 text-end">
+    <div class="col-md-5 text-end">
     {% if current_user.is_authenticated %}
         {% if current_user.is_admin %}
             <a class="btn btn-outline-secondary me-2" href="{{ url_for('user.login') }}" role="button" >Страница правления</a>

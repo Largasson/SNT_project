@@ -8,9 +8,6 @@ class RegistrationForm(FlaskForm):
                                validators=[NumberRange(message='Номер участка должен быть от 1 до 43', min=1, max=43),
                                            DataRequired(message='Поле не должно быть пустым')],
                                render_kw={'class': 'form-control'})
-    # area_number = StringField(label='Введите номер участка',
-    #                           validators=[DataRequired(message='Поле не должно быть пустым')],
-    #                           render_kw={'class': 'form-control'})
     email = EmailField(label='Введите e-mail', validators=[Email(message='Некорректный email')],
                        render_kw={'class': 'form-control'})
     phone = TelField(label='Введите номер телефона', validators=[DataRequired(message='Поле не должно быть пустым')],

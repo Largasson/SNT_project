@@ -1,5 +1,10 @@
 from flask import Blueprint, render_template
-from webapp.weather import get_weather, translate_weather_condition
+
+from webapp.news.models import News
+from webapp.weather import get_weather
+from logging import basicConfig, info, INFO
+
+basicConfig(filename='webapp/logs/news_views_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('news', __name__)
 
@@ -10,12 +15,16 @@ def index():
     """ Функция, отвечающая за главную страницу. Передает в функцию
             рендеринга макет главной страницы, информацию по погоде """
     title = 'Главная страница'
+    news = None
+    forecast, condition = None, None
+    try:
+        news = News.query.all()
+    except (TypeError, ValueError) as err:
+        info(err)
+    try:
+        forecast, condition = get_weather()
+    except (TypeError, ValueError) as err:
+        info(err)
 
-    today_forecast, tomorrow_forecast, weekend_forecast = get_weather()
-    today_condition = translate_weather_condition(today_forecast['condition']).capitalize()
-    tomorrow_condition = translate_weather_condition(tomorrow_forecast['condition']).capitalize()
-    weekend_condition = translate_weather_condition(weekend_forecast['condition']).capitalize()
-    return render_template('news/index.html', page_title=title, today_forecast=today_forecast,
-                           tomorrow_forecast=tomorrow_forecast, weekend_forecast=weekend_forecast,
-                           today_condition=today_condition, tomorrow_condition=tomorrow_condition,
-                           weekend_condition=weekend_condition)
+    return render_template('news/index.html', page_title=title,
+                           forecast=forecast, condition=condition, news=news)

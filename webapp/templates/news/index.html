@@ -13,23 +13,42 @@
     {% endif %}
     {% endwith %}
 </div>
+
 <br>
+<!-- ОСНОВНОЙ КОНТЕЙНЕР СТРАНИЦЫ -->
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-8">         <!-- ЛЕВАЯ КОЛОНКА -->
             <br>
             <!-- ТУТ БУДУТ НОВОСТИ -->
             <div class="container">
                 <div class="news-container">
-                    {% for news_item in news_items %}
-                        <h1>{{ news_item.title }}</h1>
-                        <p>{{ news_item.text }}</p>
-                    {% endfor %}
+
+                    {% if news %}
+
+                             {% for current_news  in news %}
+
+                                  <h1 class="text-center text-xl-left bg-light bg-light bg-opacity-75 p-2">{{ current_news.title }}</h1>
+                                    {% if current_news.text %}
+                                        <p class="text-start fs-3 bg-light bg-light bg-opacity-75 p-2"> {{ current_news.text }}</p>
+                                        <br>
+                                    {% else %}
+                                    <br>
+                                    {% endif %}
+                             {% endfor %}
+                    {% else %}
+
+                        <h1 class="text-center text-xl-left bg-light bg-light bg-opacity-75 p-2">Новостей нет</h1>
+
+                    {% endif %}
+
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
+
+
+        </div>
+        <div class="col-md-4">       <!-- ПРАВАЯ КОЛОНКА -->
             <!-- ТУТ БУДЕТ КАРУСЕЛЬ ПОГОДЫ -->
             <br>
             <br>
@@ -38,6 +57,7 @@
             </div>
             <div class="row">
                 <div class="container mt-4">
+                    {% if forecast and condition %}
                     <div id="carouselExample" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <!-- Карточка 1 -->
@@ -45,28 +65,29 @@
                                 <div class="card border border-dark mb-3" style="max-width: 18rem;">
                                     <div class="card-body">
                                         <h5 class="card-title">Погода на сегодня</h5>
-                                        <p class="card-text">Температура: {{ today_forecast['temp_avg'] }}<span
+                                        <p class="card-text">Температура: {{ forecast.today['temp_avg'] }}<span
                                                 id="today-temp"></span>°C</p>
-                                        <p class="card-text">Ощущается как: {{ today_forecast['feels_like'] }}<span
+                                        <p class="card-text">Ощущается как: {{ forecast.today['feels_like'] }}<span
                                                 id="today-feels-like"></span>°C</p>
-                                        <p class="card-text">Вероятность осадков: {{ today_forecast['prec_prob'] }}<span
+                                        <p class="card-text">Вероятность осадков: {{ forecast.today['prec_prob'] }}<span
                                                 id="today-precipitation"></span>%</p>
-                                        <p class="card-text">{{ today_condition }}<span id="today-condition"></span></p>
+                                        <p class="card-text">{{ condition.today }}<span id="today-condition"></span></p>
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Карточка 2 -->
                             <div class="carousel-item">
                                 <div class="card border-dark mb-3" style="max-width: 18rem;">
                                     <div class="card-body">
                                         <h5 class="card-title">Погода на завтра</h5>
-                                        <p class="card-text">Температура: {{ tomorrow_forecast['temp_avg'] }}<span
+                                        <p class="card-text">Температура: {{ forecast.tomorrow['temp_avg'] }}<span
                                                 id="tomorrow-temp"></span>°C</p>
-                                        <p class="card-text">Ощущается как: {{ tomorrow_forecast['feels_like'] }}<span
+                                        <p class="card-text">Ощущается как: {{ forecast.tomorrow['feels_like'] }}<span
                                                 id="tomorrow-feels-like"></span>°C</p>
-                                        <p class="card-text">Вероятность осадков: {{ tomorrow_forecast['prec_prob']
+                                        <p class="card-text">Вероятность осадков: {{ forecast.tomorrow['prec_prob']
                                             }}<span id="tomorrow-precipitation"></span>%</p>
-                                        <p class="card-text">{{ tomorrow_condition }}<span
+                                        <p class="card-text">{{ condition.tomorrow}}<span
                                                 id="tomorrow-condition"></span></p>
                                     </div>
                                 </div>
@@ -76,13 +97,13 @@
                                 <div class="card border-dark mb-3" style="max-width: 18rem;">
                                     <div class="card-body">
                                         <h5 class="card-title">Погода на выходные</h5>
-                                        <p class="card-text">Температура: {{ weekend_forecast['temp_avg'] }}<span
+                                        <p class="card-text">Температура: {{ forecast.weekend['temp_avg'] }}<span
                                                 id="weekend-temp"></span>°C</p>
-                                        <p class="card-text">Ощущается как: {{ weekend_forecast['feels_like'] }}<span
+                                        <p class="card-text">Ощущается как: {{ forecast.weekend['feels_like'] }}<span
                                                 id="weekend-feels-like"></span>°C</p>
-                                        <p class="card-text">Вероятность осадков: {{ weekend_forecast['prec_prob']
+                                        <p class="card-text">Вероятность осадков: {{ forecast.weekend['prec_prob']
                                             }}<span id="weekend-precipitation"></span>%</p>
-                                        <p class="card-text">{{ weekend_condition }}<span id="weekend-condition"></span>
+                                        <p class="card-text">{{ condition.weekend }}<span id="weekend-condition"></span>
                                         </p>
                                     </div>
                                 </div>
@@ -101,7 +122,10 @@
 
                         </div>
                     </div>
+                {% else %}
+                    <h5 class="text-center text-dark text-xl-left bg-light bg-light bg-opacity-75 p-2">Сервис погоды недоступен</h5>
 
+                {% endif %}
                 </div>
             </div>
         </div>

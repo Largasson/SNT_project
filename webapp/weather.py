@@ -1,5 +1,22 @@
+import typing
 import requests
 from flask import current_app
+from logging import basicConfig, info, INFO
+
+basicConfig(filename='weather_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+
+class Forecast(typing.NamedTuple):
+    today: dict
+    tomorrow: dict
+    weekend: dict
+
+
+class Conditions(typing.NamedTuple):
+    today: str
+    tomorrow: str
+    weekend: str
+
 
 # Словарь с переводами состояний погоды
 weather_translations = {
@@ -41,16 +58,26 @@ def get_weather():
         "lang": "ru_RU"
     }
 
-    response = requests.get(base_url, headers=headers, params=params)
-
-    if response.status_code == 200:
+    try:
+        response = requests.get(base_url, headers=headers, params=params)
         weather_data = response.json()
-        today_forecast = weather_data["forecasts"][0]["parts"]["day"]
-        tomorrow_forecast = weather_data["forecasts"][1]["parts"]["day"]
-        weekend_forecast = weather_data["forecasts"][2]["parts"]["day"]
-        return today_forecast, tomorrow_forecast, weekend_forecast
-    else:
-        print(f"Ошибка при получении данных о погоде. Код ошибки: {response.status_code}")
+        try:
+            today = weather_data["forecasts"][0]["parts"]["day"]
+            tomorrow = weather_data["forecasts"][1]["parts"]["day"]
+            weekend = weather_data["forecasts"][2]["parts"]["day"]
+            forecasts = Forecast(today, tomorrow, weekend)
+            conditions = Conditions(
+                translate_weather_condition(today['condition']).capitalize(),
+                translate_weather_condition(tomorrow['condition']).capitalize(),
+                translate_weather_condition(weekend['condition']).capitalize()
+            )
+            return forecasts, conditions
+        except (KeyError, IndexError, TypeError) as err:
+            info(f'Ошибка при обращении к json-файлу сервиса погоды. Ошибка связана с {err}')
+            return False
+    except requests.RequestException as err:
+        info(f'Сетевая ошибка при получении данных о погоде. Код ошибки: - {err}')
+        return False
 
 
 if __name__ == "__main__":
