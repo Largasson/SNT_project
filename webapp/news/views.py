@@ -3,10 +3,6 @@ from flask import Blueprint, render_template
 from webapp.news.models import News
 from webapp.weather import get_weather
 
-# from logging import basicConfig, info, INFO
-
-# basicConfig(filename='webapp/logs/news_views_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
-
 blueprint = Blueprint('news', __name__)
 
 

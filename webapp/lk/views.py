@@ -8,10 +8,8 @@ from webapp.lk.models import FinancialData
 from webapp.lk.forms import UploadFileForm, NewsForm
 from webapp.parsing_csv import parsing_csv
 from webapp.loader import insert_finance_data_db
-# from logging import basicConfig, info as log_info, INFO
 from datetime import datetime
 
-# basicConfig(filename='webapp/logs/pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('lk', __name__)
 
