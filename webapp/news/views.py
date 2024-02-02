@@ -4,7 +4,7 @@ from webapp.news.models import News
 from webapp.weather import get_weather
 from logging import basicConfig, info, INFO
 
-basicConfig(filename='news_views_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
+basicConfig(filename='webapp/logs/news_views_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('news', __name__)
 
@@ -15,15 +15,16 @@ def index():
     """ Функция, отвечающая за главную страницу. Передает в функцию
             рендеринга макет главной страницы, информацию по погоде """
     title = 'Главная страница'
+    news = None
+    forecast, condition = None, None
     try:
         news = News.query.all()
     except (TypeError, ValueError) as err:
         info(err)
-        news = None
     try:
         forecast, condition = get_weather()
     except (TypeError, ValueError) as err:
         info(err)
-        forecast, condition = None, None
+
     return render_template('news/index.html', page_title=title,
                            forecast=forecast, condition=condition, news=news)

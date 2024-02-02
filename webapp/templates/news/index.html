@@ -29,8 +29,12 @@
                              {% for current_news  in news %}
 
                                   <h1 class="text-center text-xl-left bg-light bg-light bg-opacity-75 p-2">{{ current_news.title }}</h1>
-                                  <p class="text-start fs-3 lh-base text-xl-left bg-light bg-light bg-opacity-75 p-2"> {{ current_news.text }}</p>
-
+                                    {% if current_news.text %}
+                                        <p class="text-start fs-3 bg-light bg-light bg-opacity-75 p-2"> {{ current_news.text }}</p>
+                                        <br>
+                                    {% else %}
+                                    <br>
+                                    {% endif %}
                              {% endfor %}
                     {% else %}
 
@@ -71,6 +75,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Карточка 2 -->
                             <div class="carousel-item">
                                 <div class="card border-dark mb-3" style="max-width: 18rem;">

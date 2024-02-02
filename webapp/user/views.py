@@ -31,13 +31,10 @@ def process_login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter(User.area_number == form.area_number.data).first()
-        print(user)
         if not user:
             flash('Пользователь с таким номером участка не зарегистрирован')
             return redirect(url_for('user.login'))
         if user and user.check_password(form.password.data):
-            print(user)
-            print(user.check_password(form.password.data))
             login_user(user, remember=form.remember_me.data)
             if current_user.is_admin:
                 return redirect(url_for('lk.board_office'))
@@ -69,7 +66,6 @@ def reg_processing():
     перенаправляется на страницу регистрации"""
     users = [x.area_number for x in db.session.query(User.area_number).distinct()]
     form = RegistrationForm()
-    print(users)
     if form.validate_on_submit():
         if int(form.area_number.data) in users:
             flash('Пользователь с таким номером участка уже зарегистрирован')

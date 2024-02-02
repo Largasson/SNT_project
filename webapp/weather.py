@@ -7,9 +7,9 @@ basicConfig(filename='weather_log.log', level=INFO, format="%(asctime)s %(leveln
 
 
 class Forecast(typing.NamedTuple):
-    today: str
-    tomorrow: str
-    weekend: str
+    today: dict
+    tomorrow: dict
+    weekend: dict
 
 
 class Conditions(typing.NamedTuple):
@@ -61,7 +61,6 @@ def get_weather():
     try:
         response = requests.get(base_url, headers=headers, params=params)
         weather_data = response.json()
-        # if 'forecasts' in weather_data:
         try:
             today = weather_data["forecasts"][0]["parts"]["day"]
             tomorrow = weather_data["forecasts"][1]["parts"]["day"]

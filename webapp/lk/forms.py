@@ -16,7 +16,7 @@ class UploadFileForm(FlaskForm):
 
 class NewsForm(FlaskForm):
     news_title = StringField(label='Заголовок новости', validators=[DataRequired()], render_kw={'class': 'form-control'})
-    news_content = TextAreaField(label='Содержание новости', validators=[DataRequired()], render_kw={'class': 'form-control'})
+    news_content = TextAreaField(label='Содержание новости', render_kw={'class': 'form-control'})
     submit2 = SubmitField(label='Опубликовать', render_kw={'class': 'btn btn-info'})
 
 

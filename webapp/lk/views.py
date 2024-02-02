@@ -11,7 +11,7 @@ from webapp.loader import insert_finance_data_db
 from logging import basicConfig, info as log_info, INFO
 from datetime import datetime
 
-basicConfig(filename='pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
+basicConfig(filename='webapp/logs/pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('lk', __name__)
 
