@@ -1,9 +1,9 @@
 import typing
 import requests
 from flask import current_app
-from logging import basicConfig, info, INFO
+# from logging import basicConfig, info, INFO
 
-basicConfig(filename='weather_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
+# basicConfig(filename='weather_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
 class Forecast(typing.NamedTuple):
@@ -73,10 +73,10 @@ def get_weather():
             )
             return forecasts, conditions
         except (KeyError, IndexError, TypeError) as err:
-            info(f'Ошибка при обращении к json-файлу сервиса погоды. Ошибка связана с {err}')
+            # info(f'Ошибка при обращении к json-файлу сервиса погоды. Ошибка связана с {err}')
             return False
     except requests.RequestException as err:
-        info(f'Сетевая ошибка при получении данных о погоде. Код ошибки: - {err}')
+        # info(f'Сетевая ошибка при получении данных о погоде. Код ошибки: - {err}')
         return False
 
 

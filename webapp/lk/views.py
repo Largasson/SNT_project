@@ -8,10 +8,10 @@ from webapp.lk.models import FinancialData
 from webapp.lk.forms import UploadFileForm, NewsForm
 from webapp.parsing_csv import parsing_csv
 from webapp.loader import insert_finance_data_db
-from logging import basicConfig, info as log_info, INFO
+# from logging import basicConfig, info as log_info, INFO
 from datetime import datetime
 
-basicConfig(filename='webapp/logs/pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
+# basicConfig(filename='webapp/logs/pars_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('lk', __name__)
 
@@ -24,9 +24,9 @@ def lk_page(area):
         if current_user.area_number == area or current_user.is_admin:
             try:
                 info = FinancialData.query.filter(FinancialData.area_number == area).first()
-            except AttributeError as err:
+            except AttributeError:
                 info = None
-                log_info(f'Проблемы с получением финансовой информации: {err}')
+                # log_info(f'Проблемы с получением финансовой информации: {err}')
             title = f'ЛК участка {area}'
             return render_template('lk/lk_page.html', page_title=title,
                                    area=area, info=info)
@@ -49,9 +49,9 @@ def board_office():
             values_to_db = parsing_csv(csv_file)
             insert_finance_data_db(values_to_db)
             ''' Логирование распарсеных данных. Нужно для контроля входящего файла '''
-            key_sort = list(sorted(values_to_db))
-            for k in key_sort:
-                log_info(f'КЛЮЧ {k}: {values_to_db[k]}')
+            # key_sort = list(sorted(values_to_db))
+            # for k in key_sort:
+            #     log_info(f'КЛЮЧ {k}: {values_to_db[k]}')
         if news_form.submit2.data and news_form.validate_on_submit():
             news_title = news_form.news_title.data
             news_content = news_form.news_content.data
