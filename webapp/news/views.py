@@ -2,9 +2,6 @@ from flask import Blueprint, render_template
 
 from webapp.news.models import News
 from webapp.weather import get_weather
-from logging import basicConfig, info, INFO
-
-basicConfig(filename='webapp/logs/news_views_log.log', level=INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 blueprint = Blueprint('news', __name__)
 
@@ -20,11 +17,13 @@ def index():
     try:
         news = News.query.all()
     except (TypeError, ValueError) as err:
-        info(err)
+        temp = err
+        # info(err)
     try:
         forecast, condition = get_weather()
     except (TypeError, ValueError) as err:
-        info(err)
+        temp = err
+        # info(err)
 
     return render_template('news/index.html', page_title=title,
                            forecast=forecast, condition=condition, news=news)
