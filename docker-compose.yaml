@@ -1,8 +1,8 @@
 version: '2.1'
 
 services:
-  container_name: web_project_SNT
   web_app:
+    container_name: web_snt
     build:
       dockerfile: Dockerfile
       context: .
