@@ -10,7 +10,7 @@ from app.user.views import blueprint as user_blueprint
 from app.lk.models import FinancialData
 from app.lk.views import blueprint as lk_blueprint
 
-from app.contact.views import blueprint as contacts_blueprint
+from app.blueprints.contacts.views import blueprint as contacts_blueprint
 
 from app.blueprints.news.views import blueprint as news_blueprint
 
