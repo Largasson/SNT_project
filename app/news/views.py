@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
-from webapp.news.models import News
-from webapp.weather import get_weather
+from app.news.models import News
+from app.weather import get_weather
 
 blueprint = Blueprint('news', __name__)
 

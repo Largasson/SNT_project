@@ -2,9 +2,9 @@ import csv
 from io import StringIO
 from datetime import date
 from typing import TypedDict
-from webapp.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
-                           TOTAL, TOTAL_EXPANDED, COUNTERPARTIES,
-                           CREDIT_FOR, DEBIY_FOR)
+from app.config import (TARGETED_FEE, MEMBER_FEE, ELECTRICITY_PAYMENTS,
+                        TOTAL, TOTAL_EXPANDED, COUNTERPARTIES,
+                        CREDIT_FOR, DEBIY_FOR)
 
 
 class CsvFileError(Exception):

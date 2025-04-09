@@ -1,5 +1,5 @@
 from datetime import datetime
-from webapp.db import db
+from app.db import db
 
 
 class News(db.Model):

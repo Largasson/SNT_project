@@ -1,5 +1,5 @@
-from webapp import db
-from webapp.lk.models import FinancialData
+from app import db
+from app.lk.models import FinancialData
 
 
 def insert_finance_data_db(res_dict):

@@ -1,18 +1,18 @@
 from flask import Flask
 from flask_login import LoginManager
 
-from webapp.db import db
+from app.db import db
 
-from webapp.user.models import User
-from webapp.user.forms import LoginForm
-from webapp.user.views import blueprint as user_blueprint
+from app.user.models import User
+from app.user.forms import LoginForm
+from app.user.views import blueprint as user_blueprint
 
-from webapp.lk.models import FinancialData
-from webapp.lk.views import blueprint as lk_blueprint
+from app.lk.models import FinancialData
+from app.lk.views import blueprint as lk_blueprint
 
-from webapp.contact.views import blueprint as contacts_blueprint
+from app.contact.views import blueprint as contacts_blueprint
 
-from webapp.news.views import blueprint as news_blueprint
+from app.news.views import blueprint as news_blueprint
 
 
 def create_app():

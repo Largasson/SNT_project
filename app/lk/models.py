@@ -1,6 +1,6 @@
 from datetime import date
 from sqlalchemy.orm import Mapped, mapped_column
-from webapp.db import db
+from app.db import db
 
 
 class FinancialData(db.Model):

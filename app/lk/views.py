@@ -1,13 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 
-from webapp import db
-from webapp.news.models import News
-from webapp.user.forms import LoginForm
-from webapp.lk.models import FinancialData
-from webapp.lk.forms import UploadFileForm, NewsForm
-from webapp.parsing_csv import parsing_csv
-from webapp.loader import insert_finance_data_db
+from app import db
+from app.news.models import News
+from app.user.forms import LoginForm
+from app.lk.models import FinancialData
+from app.lk.forms import UploadFileForm, NewsForm
+from app.parsing_csv import parsing_csv
+from app.loader import insert_finance_data_db
 from datetime import datetime
 
 
