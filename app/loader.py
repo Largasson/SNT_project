@@ -1,5 +1,5 @@
 from app import db
-from app.lk.models import FinancialData
+from app.blueprints.control_panels.admin_panel.models import FinancialData
 
 
 def insert_finance_data_db(res_dict):

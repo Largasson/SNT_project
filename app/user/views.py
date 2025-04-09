@@ -15,8 +15,8 @@ def login():
     получении данных из формы они перенаправляются функции process_login """
     if current_user.is_authenticated:
         if current_user.area_number == 0:
-            return redirect(url_for('lk.board_office'))
-        return redirect(url_for('lk.lk_page', area=current_user.area_number))
+            return redirect(url_for('admin_panel.admin_panel'))
+        return redirect(url_for('user_panel.user_panel', area=current_user.area_number))
     title = 'Авторизация'
     login_form = LoginForm()
     return render_template('login/login.html', page_title=title, form=login_form)
@@ -37,8 +37,8 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             if current_user.is_admin:
-                return redirect(url_for('lk.board_office'))
-            return redirect(url_for('lk.lk_page', area=form.area_number.data))
+                return redirect(url_for('admin_panel.admin_panel'))
+            return redirect(url_for('user_panel.user_panel', area=form.area_number.data))
     flash('Неверный номер участка или пароль')
     return redirect(url_for('user.login'))
 

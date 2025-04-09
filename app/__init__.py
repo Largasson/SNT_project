@@ -5,10 +5,20 @@ from app.db import db
 
 from app.user.models import User
 from app.user.forms import LoginForm
+
+
+
+
 from app.user.views import blueprint as user_blueprint
 
-from app.lk.models import FinancialData
-from app.lk.views import blueprint as lk_blueprint
+
+from app.blueprints.control_panels.admin_panel.models import FinancialData
+
+
+from app.blueprints.control_panels.user_panel.views import blueprint as user_panel_blueprint
+from app.blueprints.control_panels.admin_panel.views import blueprint as admin_panel_blueprint
+
+
 
 from app.blueprints.contacts.views import blueprint as contacts_blueprint
 
@@ -27,7 +37,8 @@ def create_app():
     login_manager.login_view = 'user.login'
 
     app.register_blueprint(contacts_blueprint)
-    app.register_blueprint(lk_blueprint)
+    app.register_blueprint(user_panel_blueprint)
+    app.register_blueprint(admin_panel_blueprint)
     app.register_blueprint(news_blueprint)
     app.register_blueprint(user_blueprint)
 
