@@ -3,7 +3,7 @@
 {% block body %}
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
-  <form action="{{ url_for('user.process_login') }}" method="post">
+  <form action="{{ url_for('auth.login.process_login') }}" method="post">
     <h1 class="h3 mb-3 fw-normal text-center">
         <a href="/" > <img class="head_img" src="{{ url_for('static', filename='img/icon.png') }}" alt='pic'></a>
                  Вход в ЛК</h1>

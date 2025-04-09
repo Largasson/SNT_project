@@ -14,10 +14,9 @@ from app.blueprints.auth.forms import LoginForm
 
 from app.blueprints.control_panels.admin_panel.models import FinancialData
 
-
+from app.blueprints.auth import blueprint as auth
 from app.blueprints.control_panels.user_panel.views import blueprint as user_panel
 from app.blueprints.control_panels.admin_panel.views import blueprint as admin_panel
-from app.blueprints.auth.views import blueprint as user
 from app.blueprints.contacts.views import blueprint as contacts
 from app.blueprints.news.views import blueprint as news
 
@@ -37,7 +36,7 @@ def create_app():
     app.register_blueprint(user_panel)
     app.register_blueprint(admin_panel)
     app.register_blueprint(news)
-    app.register_blueprint(user)
+    app.register_blueprint(auth)
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -14,7 +14,7 @@
             </div>
         {% endif %}
      {% endwith %}
-    <form action="{{ url_for('user.reg_processing') }}" method="POST">
+    <form action="{{ url_for('auth.registration.reg_processing') }}" method="POST">
 
         <h1 class="h3 mb-3 fw-normal text-center">
             <a href="/" > <img class="head_img" src="{{ url_for('static', filename='img/icon.png') }}" alt='pic'></a>

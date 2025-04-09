@@ -10,7 +10,7 @@
     <div class="col-md-5 text-end">
     {% if current_user.is_authenticated %}
         {% if current_user.is_admin %}
-            <a class="btn btn-outline-secondary me-2" href="{{ url_for('user.login') }}" role="button" >Страница правления</a>
+            <a class="btn btn-outline-secondary me-2" href="{{ url_for('auth.login.login') }}" role="button" >Страница правления</a>
              <div class="btn-group" >
                   <button type="button" class="btn btn-primary dropdown-toggle me-2" data-bs-toggle="dropdown" aria-expanded="false">ЛК участков</button>
                   <ul class="dropdown-menu scrollable-menu">
@@ -19,14 +19,14 @@
                          {% endfor %}
                       </ul>
                     </div>
-            <a class="btn btn-primary" href="{{ url_for('user.logout') }}" role="button">Выйти</a>
+            <a class="btn btn-primary" href="{{ url_for('auth.logout.logout') }}" role="button">Выйти</a>
         {% else %}
-            <a class="btn btn-outline-secondary me-2" href="{{ url_for('user.login') }}" role="button">Личный кабинет</a>
-            <a class="btn btn-primary" href="{{ url_for('user.logout') }}" role="button">Выйти</a>
+            <a class="btn btn-outline-secondary me-2" href="{{ url_for('auth.login.login') }}" role="button">Личный кабинет</a>
+            <a class="btn btn-primary" href="{{ url_for('auth.logout.logout') }}" role="button">Выйти</a>
         {% endif %}
     {% else %}
-        <a class="btn btn-outline-primary me-2" href="{{ url_for('user.login') }}" role="button">Войти</a>
-        <a class="btn btn-primary" href="{{ url_for('user.registration') }}" role="button">Зарегистрироваться</a>
+        <a class="btn btn-outline-primary me-2" href="{{ url_for('auth.login.login') }}" role="button">Войти</a>
+        <a class="btn btn-primary" href="{{ url_for('auth.registration.registration') }}" role="button">Зарегистрироваться</a>
     {% endif %}
     </div>
 </header>
