@@ -1,0 +1,69 @@
+work-sok:/mnt/c/projects/SNT_project$ tree 
+
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── REDMEF_IMG
+│   ├── admin_lk.png
+│   ├── img.png
+│   ├── img_1.png
+│   ├── lk.png
+│   ├── login.png
+│   ├── mainpaige.png
+│   └── reg_img.png
+├── create_db.py
+├── docker-compose.yaml
+├── requirements.txt
+├── webapp
+│   ├── __init__.py
+│   ├── config.py
+│   ├── contact
+│   │   ├── __init__.py
+│   │   └── views.py
+│   ├── db.py
+│   ├── lk
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   └── views.py
+│   ├── loader.py
+│   ├── logs
+│   │   └── pars_log.log
+│   ├── news
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   └── views.py
+│   ├── parsing_csv.py
+│   ├── static
+│   │   ├── img
+│   │   │   ├── Ukrainskie-zheleznye-dorogi.gif
+│   │   │   ├── background.jpg
+│   │   │   ├── background_2.jpg
+│   │   │   ├── background_3.jpg
+│   │   │   ├── icon.png
+│   │   │   └── weather.png
+│   │   ├── sign-in.css
+│   │   └── style.css
+│   ├── templates
+│   │   ├── base.html
+│   │   ├── base_login.html
+│   │   ├── contact
+│   │   │   └── contacts.html
+│   │   ├── lk
+│   │   │   ├── board_office.html
+│   │   │   └── lk_page.html
+│   │   ├── login
+│   │   │   ├── login.html
+│   │   │   └── registration.html
+│   │   ├── menu.html
+│   │   └── news
+│   │       └── index.html
+│   ├── test-3.csv
+│   ├── user
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   └── views.py
+│   ├── weather.py
+│   └── webapp.db
+├── контекст_08.04.2025.txt
+└── контекст_08.04.2025_2.txt
