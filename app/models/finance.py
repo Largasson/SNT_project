@@ -1,9 +1,9 @@
 from datetime import date
 from sqlalchemy.orm import Mapped, mapped_column
-from app.db import db
+from app.extensions.db import db
 
 
-class FinancialData(db.Model):
+class Finance(db.Model):
     __tablename__ = 'financial_data'
     __table_args__ = {'comment': 'Общая финансовая таблица, загружаемая извне в ЛК у админа'}
     id: Mapped[int] = mapped_column(autoincrement=True, nullable=False)

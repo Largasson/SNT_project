@@ -1,39 +1,47 @@
-work-sok:/mnt/c/projects/SNT_project$ tree 
 
+
+├── 1.db
 ├── Dockerfile
-├── LICENSE
-├── README.md
-├── REDMEF_IMG
-│   ├── admin_lk.png
-│   ├── img.png
-│   ├── img_1.png
-│   ├── lk.png
-│   ├── login.png
-│   ├── mainpaige.png
-│   └── reg_img.png
-├── create_db.py
-├── docker-compose.yaml
-├── requirements.txt
-├── webapp
+├── app
 │   ├── __init__.py
+│   ├── app.db
+│   ├── app.py
+│   ├── blueprints
+│   │   ├── __init__.py
+│   │   ├── auth
+│   │   │   ├── __init__.py
+│   │   │   ├── forms.py
+│   │   │   └── views
+│   │   │       ├── __init__.py
+│   │   │       ├── login.py
+│   │   │       ├── logout.py
+│   │   │       └── registration.py
+│   │   ├── contacts
+│   │   │   ├── __init__.py
+│   │   │   └── views.py
+│   │   ├── control_panels
+│   │   │   ├── __init__.py
+│   │   │   ├── admin_panel
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── forms.py
+│   │   │   │   └── views.py
+│   │   │   └── user_panel
+│   │   │       ├── __init__.py
+│   │   │       └── views.py
+│   │   └── main_page
+│   │       ├── __init__.py
+│   │       └── views.py
 │   ├── config.py
-│   ├── contact
-│   │   ├── __init__.py
-│   │   └── views.py
 │   ├── db.py
-│   ├── lk
-│   │   ├── __init__.py
-│   │   ├── models.py
-│   │   └── views.py
 │   ├── loader.py
 │   ├── logs
 │   │   └── pars_log.log
-│   ├── news
+│   ├── models
 │   │   ├── __init__.py
-│   │   ├── models.py
-│   │   └── views.py
+│   │   ├── finance.py
+│   │   ├── news.py
+│   │   └── user.py
 │   ├── parsing_csv.py
-│   ├── static
 │   │   ├── img
 │   │   │   ├── Ukrainskie-zheleznye-dorogi.gif
 │   │   │   ├── background.jpg
@@ -46,24 +54,18 @@ work-sok:/mnt/c/projects/SNT_project$ tree
 │   ├── templates
 │   │   ├── base.html
 │   │   ├── base_login.html
-│   │   ├── contact
+│   │   ├── contacts
 │   │   │   └── contacts.html
-│   │   ├── lk
-│   │   │   ├── board_office.html
-│   │   │   └── lk_page.html
+│   │   ├── control_panels
+│   │   │   ├── admin_panel.html
+│   │   │   └── user_panel.html
 │   │   ├── login
 │   │   │   ├── login.html
 │   │   │   └── registration.html
-│   │   ├── menu.html
-│   │   └── news
-│   │       └── index.html
-│   ├── test-3.csv
-│   ├── user
-│   │   ├── __init__.py
-│   │   ├── forms.py
-│   │   ├── models.py
-│   │   └── views.py
-│   ├── weather.py
-│   └── webapp.db
-├── контекст_08.04.2025.txt
-└── контекст_08.04.2025_2.txt
+│   │   ├── main_page
+│   │   │   └── main_page.html
+│   │   └── menu.html
+│   └── weather.py
+├── create_db.py
+├── docker-compose.yaml
+├── requirements.txt

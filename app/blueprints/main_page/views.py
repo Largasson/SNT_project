@@ -1,14 +1,14 @@
 from flask import Blueprint, render_template
 
-from app.blueprints.news.models import News
-from app.weather import get_weather
+from app.models.news import News
+from app.services.weather import get_weather
 
-blueprint = Blueprint('news', __name__)
+blueprint = Blueprint('main_page', __name__)
 
 
 @blueprint.route('/')
 @blueprint.route('/index')
-def index():
+def main_page():
     """ Функция, отвечающая за главную страницу. Передает в функцию
             рендеринга макет главной страницы, информацию по погоде """
     title = 'Главная страница'
@@ -25,5 +25,5 @@ def index():
         temp = err
         # info(err)
 
-    return render_template('news/index.html', page_title=title,
+    return render_template('main_page/main_page.html', page_title=title,
                            forecast=forecast, condition=condition, news=news)

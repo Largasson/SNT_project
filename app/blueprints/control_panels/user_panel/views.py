@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 
 from app.blueprints.auth.forms import LoginForm
-from app.blueprints.control_panels.admin_panel.models import FinancialData
+from app.models import Finance
 
 blueprint = Blueprint('user_panel', __name__)
 
@@ -14,7 +14,7 @@ def user_panel(area):
     if current_user.is_authenticated:
         if current_user.area_number == area or current_user.is_admin:
             try:
-                info = FinancialData.query.filter(FinancialData.area_number == area).first()
+                info = Finance.query.filter(Finance.area_number == area).first()
             except AttributeError:
                 info = None
                 # log_info(f'Проблемы с получением финансовой информации: {err}')
