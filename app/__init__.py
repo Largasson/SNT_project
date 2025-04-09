@@ -3,26 +3,23 @@ from flask_login import LoginManager
 
 from app.db import db
 
-from app.user.models import User
-from app.user.forms import LoginForm
+from app.blueprints.auth.models import User
+from app.blueprints.auth.forms import LoginForm
 
 
 
 
-from app.user.views import blueprint as user_blueprint
+
 
 
 from app.blueprints.control_panels.admin_panel.models import FinancialData
 
 
-from app.blueprints.control_panels.user_panel.views import blueprint as user_panel_blueprint
-from app.blueprints.control_panels.admin_panel.views import blueprint as admin_panel_blueprint
-
-
-
-from app.blueprints.contacts.views import blueprint as contacts_blueprint
-
-from app.blueprints.news.views import blueprint as news_blueprint
+from app.blueprints.control_panels.user_panel.views import blueprint as user_panel
+from app.blueprints.control_panels.admin_panel.views import blueprint as admin_panel
+from app.blueprints.auth.views import blueprint as user
+from app.blueprints.contacts.views import blueprint as contacts
+from app.blueprints.news.views import blueprint as news
 
 
 def create_app():
@@ -36,11 +33,11 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'user.login'
 
-    app.register_blueprint(contacts_blueprint)
-    app.register_blueprint(user_panel_blueprint)
-    app.register_blueprint(admin_panel_blueprint)
-    app.register_blueprint(news_blueprint)
-    app.register_blueprint(user_blueprint)
+    app.register_blueprint(contacts)
+    app.register_blueprint(user_panel)
+    app.register_blueprint(admin_panel)
+    app.register_blueprint(news)
+    app.register_blueprint(user)
 
     @login_manager.user_loader
     def load_user(user_id):

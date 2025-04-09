@@ -3,8 +3,6 @@ from flask_login import current_user
 
 from app import db
 from app.blueprints.news.models import News
-from app.user.forms import LoginForm
-from app.blueprints.control_panels.admin_panel.models import FinancialData
 from app.blueprints.control_panels.admin_panel.forms import UploadFileForm, NewsForm
 from app.parsing_csv import parsing_csv
 from app.loader import insert_finance_data_db

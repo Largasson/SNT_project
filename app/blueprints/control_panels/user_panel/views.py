@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 
-from app.user.forms import LoginForm
+from app.blueprints.auth.forms import LoginForm
 from app.blueprints.control_panels.admin_panel.models import FinancialData
 
 blueprint = Blueprint('user_panel', __name__)
