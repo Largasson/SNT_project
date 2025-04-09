@@ -12,7 +12,7 @@ from app.lk.views import blueprint as lk_blueprint
 
 from app.contact.views import blueprint as contacts_blueprint
 
-from app.news.views import blueprint as news_blueprint
+from app.blueprints.news.views import blueprint as news_blueprint
 
 
 def create_app():

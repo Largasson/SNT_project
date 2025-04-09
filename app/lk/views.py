@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 
 from app import db
-from app.news.models import News
+from app.blueprints.news.models import News
 from app.user.forms import LoginForm
 from app.lk.models import FinancialData
 from app.lk.forms import UploadFileForm, NewsForm
