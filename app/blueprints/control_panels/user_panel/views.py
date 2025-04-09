@@ -31,7 +31,7 @@ def user_panel(area):
         return redirect(url_for('user_panel.user_panel', area=current_user.area_number))
     title = 'Авторизация'
     login_form = LoginForm()
-    return render_template('login.html', page_title=title, form=login_form)
+    return render_template('login/login.html', page_title=title, form=login_form)
 
 
 @blueprint.route('/download/act/<int:area>', methods=['GET'])
