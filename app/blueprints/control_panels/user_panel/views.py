@@ -21,7 +21,7 @@ def user_panel(area):
             title = f'ЛК участка {area}'
             return render_template('control_panels/user_panel.html', page_title=title,
                                    area=area, info=info)
-        return redirect(url_for('control_panel.user_panel', area=current_user.area_number))
+        return redirect(url_for('user_panel.user_panel', area=current_user.area_number))
     title = 'Авторизация'
     login_form = LoginForm()
     return render_template('login.html', page_title=title, form=login_form)
