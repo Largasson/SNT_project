@@ -1,6 +1,4 @@
 
-
-├── 1.db
 ├── Dockerfile
 ├── app
 │   ├── __init__.py
@@ -31,9 +29,13 @@
 │   │   └── main_page
 │   │       ├── __init__.py
 │   │       └── views.py
-│   ├── config.py
-│   ├── db.py
-│   ├── loader.py
+│   ├── config
+│   │   ├── __init__.py
+│   │   └── dev.py
+│   ├── extensions
+│   │   ├── __init__.py
+│   │   ├── db.py
+│   │   └── login_manager.py
 │   ├── logs
 │   │   └── pars_log.log
 │   ├── models
@@ -41,7 +43,12 @@
 │   │   ├── finance.py
 │   │   ├── news.py
 │   │   └── user.py
-│   ├── parsing_csv.py
+│   ├── services
+│   │   ├── __init__.py
+│   │   ├── loader.py
+│   │   ├── parsing_csv.py
+│   │   └── weather.py
+│   ├── static
 │   │   ├── img
 │   │   │   ├── Ukrainskie-zheleznye-dorogi.gif
 │   │   │   ├── background.jpg
@@ -51,21 +58,21 @@
 │   │   │   └── weather.png
 │   │   ├── sign-in.css
 │   │   └── style.css
-│   ├── templates
-│   │   ├── base.html
-│   │   ├── base_login.html
-│   │   ├── contacts
-│   │   │   └── contacts.html
-│   │   ├── control_panels
-│   │   │   ├── admin_panel.html
-│   │   │   └── user_panel.html
-│   │   ├── login
-│   │   │   ├── login.html
-│   │   │   └── registration.html
-│   │   ├── main_page
-│   │   │   └── main_page.html
-│   │   └── menu.html
-│   └── weather.py
+│   └── templates
+│       ├── base.html
+│       ├── base_login.html
+│       ├── contacts
+│       │   └── contacts.html
+│       ├── control_panels
+│       │   ├── admin_panel.html
+│       │   └── user_panel.html
+│       ├── login
+│       │   ├── login.html
+│       │   └── registration.html
+│       ├── main_page
+│       │   └── main_page.html
+│       └── menu.html
 ├── create_db.py
 ├── docker-compose.yaml
-├── requirements.txt
+├── password.py
+└── requirements.txt
