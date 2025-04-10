@@ -1,9 +1,13 @@
 from .db import db
 from .login_manager import login_manager
 from app.models import User
+from flask_migrate import Migrate
+
+migrate = Migrate()
 
 def init_extensions(app):
     db.init_app(app)
+    migrate.init_app(app, db)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login.login'
 
