@@ -11,6 +11,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 parent_dir = os.path.abspath(os.path.join(basedir, os.pardir))  # Родительская директория
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(parent_dir, 'app.db')
 REMEMBER_COOKIE_DURATION = timedelta(days=30)
+FLASK_DEBUG = os.getenv('FLASK_DEBUG')
+LOG_FORMAT = os.getenv('LOG_FORMAT')
+
 
 # Константы для функции парсинга
 TARGETED_FEE = 'Целевые взносы'

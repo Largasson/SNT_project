@@ -1,6 +1,8 @@
 import os
+from dotenv import load_dotenv
 
-# Получение текущего окружения (по умолчанию — dev)
+load_dotenv()
+
 env = os.getenv("FLASK_ENV", "dev")
 
 if env == "prod":
