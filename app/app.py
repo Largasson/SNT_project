@@ -16,9 +16,8 @@ from app.blueprints.main_page.views import blueprint as main_page
 from flask import Flask
 
 
-def create_app():
-    """
-    Инициализирует Flask-приложение и его компоненты для различных окружений.
+def create_app() -> Flask:
+    """Инициализирует Flask-приложение и его компоненты.
 
     Главная функция настраивает Flask-приложение, определяя конфигурацию на основе
     окружения, регистрирует blueprints и инициализирует расширения. Она считывает
@@ -89,7 +88,6 @@ def create_app():
 
 
 if __name__ == "__main__":
-    # Запуск приложения напрямую
     flask_app = create_app()
     port = 8000
     logger.info(f"Запуск приложения на http://localhost:{port}")
