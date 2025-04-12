@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ error_code }} | Что-то пошло не так</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 5rem;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .robot {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #495057;
+            margin: 20px 0;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            font-size: 0.875rem;
+            color: #adb5bd;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .robot {
+                max-width: 200px;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            a {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ error_code }}</h1>
+    <h2>{{ error_message }}</h2>
+    <img src="https://cdn.pixabay.com/photo/2016/12/13/12/07/robot-1901157_1280.png" alt="Ошибка" class="robot">
+    <p>
+        Кажется, произошла ошибка. Мы работаем над ее исправлением.<br>
+        Попробуйте вернуться на главную страницу.
+    </p>
+    <a href="{{ url_for('news.index') }}">Вернуться на главную</a>
+
+</body>
+</html>
