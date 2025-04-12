@@ -18,22 +18,17 @@ def login():
     Если нет:
         - Рендерит страницу логина с формой авторизации.
     """
-    try:
-        if current_user.is_authenticated:
-            # Направляем пользователей в зависимости от их роли
-            target_url = url_for('admin_panel.admin_panel') if current_user.is_admin \
-                else url_for('user_panel.user_panel', area=current_user.area_number)
-            logger.info(f"Пользователь {current_user.area} уже залогинен. Перенаправляем на {target_url}.")
-            return redirect(target_url)
+    if current_user.is_authenticated:
+        # Направляем пользователей в зависимости от их роли
+        target_url = url_for('admin_panel.admin_panel') if current_user.is_admin \
+            else url_for('user_panel.user_panel', area=current_user.area_number)
+        logger.info(f"Пользователь {current_user.area} уже залогинен. Перенаправляем на {target_url}.")
+        return redirect(target_url)
 
-        # Рендеринг страницы логина
-        title = 'Авторизация'
-        login_form = LoginForm()
-        return render_template('login/login.html', page_title=title, form=login_form)
-    except Exception as e:
-        logger.error(f"Ошибка на странице логина: {str(e)}")
-        flash('Произошла ошибка при попытке открыть страницу логина. Повторите позже.')
-        return redirect(url_for('exc_page.page_not_found'))
+    # Рендеринг страницы логина
+    title = 'Авторизация'
+    login_form = LoginForm()
+    return render_template('login/login.html', page_title=title, form=login_form)
 
 
 @blueprint.route('/process_login', methods=['POST'])
