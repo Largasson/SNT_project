@@ -1,10 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for
-from flask import send_file, abort
-from flask_login import current_user
-from app.blueprints.auth.forms import LoginForm
-from app.models import Finance
 import os
 
+from flask import abort, Blueprint, redirect, render_template, send_file, url_for
+from flask_login import current_user, login_required
+
+from app.extensions.logger import logger
+from app.models import Finance
+
+# Создание blueprint для пользовательской панели
 blueprint = Blueprint('user_panel', __name__)
 
 # Абсолютный путь к корню приложения (где находится папка app)
@@ -14,45 +16,73 @@ ACTS_DIRECTORY = os.path.join(BASE_DIR, 'static', 'acts')
 
 
 @blueprint.route('/user/<int:area>')
+@login_required
 def user_panel(area):
-    """Функция генерирующая страницу рядового пользователя.
-    Также проверяет залогинен ли пользователь."""
-    print(f"ACTS_DIRECTORY: {ACTS_DIRECTORY}")
+    """
+    Генерация страницы пользователя. Проверяется доступ к указанному участку.
+    """
+    try:
+        logger.info(f"Пользователь {current_user.area_number} пытается получить доступ к странице участка {area}.")
 
-    if current_user.is_authenticated:
-        if current_user.area_number == area or current_user.is_admin:  # Проверка прав доступа
+        # Проверка прав доступа пользователя к указанному участку
+        if current_user.area_number == area or current_user.is_admin:
             try:
                 info = Finance.query.filter(Finance.area_number == area).first()
+                if not info:
+                    logger.warning(f"Данные по участку {area} отсутствуют.")
             except AttributeError:
+                logger.warning(f"Ошибка при запросе данных для участка {area}.")
                 info = None
-            title = f'ЛК участка {area}'
-            return render_template('control_panels/user_panel.html', page_title=title,
-                                   area=area, info=info)
+
+            title = f'Личный кабинет участка {area}'
+            logger.info(f"Страница доступна для пользователя {current_user.area_number}.")
+            return render_template(
+                'control_panels/user_panel.html',
+                page_title=title,
+                area=area,
+                info=info
+            )
+
+        # Если доступ запрещён (участок не совпадает и пользователь не администратор)
+        logger.warning(f"Доступ к участку {area} запрещён для пользователя {current_user.area_number}. Перенаправление.")
         return redirect(url_for('user_panel.user_panel', area=current_user.area_number))
-    title = 'Авторизация'
-    login_form = LoginForm()
-    return render_template('login/login.html', page_title=title, form=login_form)
+
+    except Exception as e:
+        # Общая обработка ошибок для маршрута и рендер ошибки
+        logger.error(f"Необработанная ошибка на странице пользователя: {str(e)}")
+        return render_template('error.html', page_title='Ошибка'), 500
 
 
 @blueprint.route('/download/act/<int:area>', methods=['GET'])
+@login_required
 def download_act(area):
     """
     Защищённый маршрут для скачивания акта сверки.
+    Проверяется права доступа к участку.
     """
+    try:
+        logger.info(f"Запрос на скачивание акта сверки для участка {area} со стороны пользователя {current_user.area_number}.")
 
-    print(f"ACTS_DIRECTORY: {ACTS_DIRECTORY}")
+        # Проверка прав доступа
+        if current_user.area_number != area and not current_user.is_admin:
+            logger.warning(f"Пользователь {current_user.id} не имеет прав на участок {area}.")
+            abort(403)  # Доступ запрещён
 
-    if not current_user.is_authenticated:
-        abort(403)  # Если пользователь не авторизован, доступ запрещён
-    if current_user.area_number != area and not current_user.is_admin:
-        abort(403)  # Пользователь не имеет прав на доступ к данному участку
+        # Формирование имени файла и пути к нему
+        file_name = f'{area}.xls'
+        file_path = os.path.join(ACTS_DIRECTORY, file_name)
+        logger.info(f"Попытка доступа к файлу: {file_path}")
 
-    file_name = f'{area}.xls'  # Имя файла на основе номера участка
-    file_path = os.path.join(ACTS_DIRECTORY, file_name)
-    print(f"ACTS_DIRECTORY: {ACTS_DIRECTORY}")
-    print(f"file_path: {file_path}")
+        # Проверка, существует ли файл
+        if not os.path.exists(file_path):
+            logger.error(f"Файл {file_name} не найден в {ACTS_DIRECTORY}.")
+            abort(404)  # Возврат ошибки 404
 
-    if not os.path.exists(file_path):  # Проверка существования файла
-        abort(404)  # Если файл не найден, возвращается ошибка 404
+        # Отправка файла на скачивание
+        logger.info(f"Акт сверки {file_name} отправляется пользователю {current_user.area_number}.")
+        return send_file(file_path, as_attachment=True)
 
-    return send_file(file_path, as_attachment=True)  # Отправка файла на скачивание
+    except Exception as e:
+        # Общая обработка ошибок для маршрута и рендер ошибки
+        logger.error(f"Необработанная ошибка при скачивании акта: {str(e)}")
+        return render_template('error.html', page_title='Ошибка'), 500

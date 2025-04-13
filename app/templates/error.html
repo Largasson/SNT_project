@@ -3,98 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ error_code }} | Что-то пошло не так</title>
+    <title>{{ error_code }} | Страница не найдена</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            text-align: center;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            text-align: center;
+            background: url('https://cdn.pixabay.com/photo/2021/03/25/18/38/fantasy-6121313_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff; /* Основной цвет текста */
         }
 
         h1 {
-            font-size: 5rem;
-            color: #dc3545;
-            margin-bottom: 10px;
+            font-size: 6rem;
+            color: #ff6f61; /* Яркий контрастный цвет */
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8); /* Тень для читаемости */
+            animation: floaty 3s infinite ease-in-out;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-
-        .robot {
-            width: 100%;
-            max-width: 300px;
+        @keyframes floaty {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         p {
-            font-size: 1rem;
-            color: #495057;
+            font-size: 1.5rem;
             margin: 20px 0;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75); /* Добавлена тень */
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         a {
             text-decoration: none;
-            font-size: 1rem;
-            color: white;
-            background-color: #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            font-size: 1.5rem;
+            color: #ffffff;
+            background-color: #3498db;
+            padding: 12px 25px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, .5);
+            transform: scale(1.1);
         }
 
         .footer {
-            font-size: 0.875rem;
-            color: #adb5bd;
             margin-top: 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8); /* Тень для читаемости */
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 3rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            .robot {
-                max-width: 200px;
+                font-size: 4rem;
             }
 
             p {
-                font-size: 0.9rem;
+                font-size: 1.2rem;
             }
 
             a {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+                font-size: 1.2rem;
+                padding: 10px 20px;
             }
         }
     </style>
 </head>
 <body>
     <h1>{{ error_code }}</h1>
-    <h2>{{ error_message }}</h2>
-    <img src="https://cdn.pixabay.com/photo/2016/12/13/12/07/robot-1901157_1280.png" alt="Ошибка" class="robot">
-    <p>
-        Кажется, произошла ошибка. Мы работаем над ее исправлением.<br>
-        Попробуйте вернуться на главную страницу.
-    </p>
-    <a href="{{ url_for('news.index') }}">Вернуться на главную</a>
-
+    <p>Извините, запрашиваемая страница не найдена.<br>Вы можете перейти на главную страницу сайта, чтобы продолжить.</p>
+    <a href="{{ url_for('main_page.main_page') }}">Вернуться на главную</a>
+    <div class="footer">Если ошибка повторяется, пожалуйста, обратитесь в поддержку.</div>
 </body>
 </html>
