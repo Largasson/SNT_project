@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="flex-container">
+        <div class="first">
+            {% if area %}
+                <a href="{{ url_for('user_panel.download_act', area=area) }}" style="color: black" download>
+                    Скачать акт сверки
+                </a>
+            {% else %}
+                <p>Файл недоступен</p>
+            {% endif %}
+        </div>
+        <div class="second">
+            <p style="text-align: center">Добро пожаловать в личный кабинет участка № {{ area }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="table-responsive">
+                <table class="table table-sm table caption-top table table-bordered">
+                    <caption>Данные по состоянию лицевого счета на {{ info.published }}</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Участок</th>
+                        <th scope="col">Членские взносы</th>
+                        <th scope="col">Целевые взносы</th>
+                        <th scope="col">Электричество</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ area }}</th>
+                        {% if info %}
+                            <td>{{ info.member_fee }}</td>
+                            <td>{{ info.targeted_fee }}</td>
+                            <td>{{ info.electricity_payments }}</td>
+                        {% else %}
+                            <td>Нет данных</td>
+                            <td>Нет данных</td>
+                            <td>Нет данных</td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

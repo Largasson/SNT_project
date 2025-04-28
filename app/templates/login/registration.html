@@ -1,0 +1,48 @@
+{% extends "base_login.html" %}
+
+{% block body %}
+
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+
+<main class="form-signin w-100 m-auto">
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert"  style="text-align: center">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+     {% endwith %}
+    <form action="{{ url_for('auth.registration.reg_processing') }}" method="POST">
+
+        <h1 class="h3 mb-3 fw-normal text-center">
+            <a href="/" > <img class="head_img" src="{{ url_for('static', filename='img/icon.png') }}" alt='pic'></a>
+            Регистрация</h1>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.area_number(type="area_number") }} {{ form.area_number.label }}
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.email }} {{ form.email.label }}
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.phone }} {{ form.phone.label }}
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.password }} {{ form.password.label }}
+        </div>
+        <div class="form-floating">
+                {{ form.csrf_token }}
+                {{ form.confirm(mod="password1") }} {{ form.confirm.label }}
+
+        </div>
+                {{ form.submit() }}
+        <p class="mt-2 mb-3 text-body-secondary">&copy;2024</p>
+    </form>
+</main>
+</body>
+{% endblock %}

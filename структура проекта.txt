@@ -1,0 +1,78 @@
+
+├── Dockerfile
+├── app
+│   ├── __init__.py
+│   ├── app.db
+│   ├── app.py
+│   ├── blueprints
+│   │   ├── __init__.py
+│   │   ├── auth
+│   │   │   ├── __init__.py
+│   │   │   ├── forms.py
+│   │   │   └── views
+│   │   │       ├── __init__.py
+│   │   │       ├── login.py
+│   │   │       ├── logout.py
+│   │   │       └── registration.py
+│   │   ├── contacts
+│   │   │   ├── __init__.py
+│   │   │   └── views.py
+│   │   ├── control_panels
+│   │   │   ├── __init__.py
+│   │   │   ├── admin_panel
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── forms.py
+│   │   │   │   └── views.py
+│   │   │   └── user_panel
+│   │   │       ├── __init__.py
+│   │   │       └── views.py
+│   │   └── main_page
+│   │       ├── __init__.py
+│   │       └── views.py
+│   ├── config
+│   │   ├── __init__.py
+│   │   └── dev.py
+│   ├── extensions
+│   │   ├── __init__.py
+│   │   ├── db.py
+│   │   └── login_manager.py
+│   ├── logs
+│   │   └── pars_log.log
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── finance.py
+│   │   ├── news.py
+│   │   └── user.py
+│   ├── services
+│   │   ├── __init__.py
+│   │   ├── loader.py
+│   │   ├── parsing_csv.py
+│   │   └── weather.py
+│   ├── static
+│   │   ├── img
+│   │   │   ├── Ukrainskie-zheleznye-dorogi.gif
+│   │   │   ├── background.jpg
+│   │   │   ├── background_2.jpg
+│   │   │   ├── background_3.jpg
+│   │   │   ├── icon.png
+│   │   │   └── weather.png
+│   │   ├── sign-in.css
+│   │   └── style.css
+│   └── templates
+│       ├── base.html
+│       ├── base_login.html
+│       ├── contacts
+│       │   └── contacts.html
+│       ├── control_panels
+│       │   ├── admin_panel.html
+│       │   └── user_panel.html
+│       ├── login
+│       │   ├── login.html
+│       │   └── registration.html
+│       ├── main_page
+│       │   └── main_page.html
+│       └── menu.html
+├── create_db.py
+├── docker-compose.yaml
+├── password.py
+└── requirements.txt
