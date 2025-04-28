@@ -62,7 +62,6 @@ def reg_processing():
         new_user = User(
             area_number=form.area_number.data,
             email=form.email.data,
-            phone=form.phone.data,
             role='user',
         )
         new_user.set_password(form.password.data)

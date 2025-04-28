@@ -36,10 +36,6 @@ class User(db.Model, UserMixin):
         nullable=False,
         comment="Адрес электронной почты пользователя",
     )
-    phone: Mapped[str | None] = mapped_column(
-        nullable=True,
-        comment="Номер телефона пользователя",
-    )
     password: Mapped[str] = mapped_column(
         nullable=False,
         comment="Хэшированный пароль пользователя",
