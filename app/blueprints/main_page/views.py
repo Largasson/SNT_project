@@ -36,6 +36,7 @@ def main_page():
 
     try:
         # Рендеринг страницы
+
         return render_template(
             'main_page/main_page.html',
             page_title=title,
@@ -43,6 +44,7 @@ def main_page():
             condition=condition,
             news=news
         )
+
     except Exception as err:
         logger.error(f"Ошибка во время рендеринга главной страницы: {err}")
         return render_template('error.html', page_title='Ошибка'), 500
